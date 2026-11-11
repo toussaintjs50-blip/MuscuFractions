@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eaf1e8">
+<title>Muscu Fractions</title>
+<style>
+:root{--bg:#edf2e9;--ink:#243e34;--green:#35654d;--pale:#e5eee2;--muted:#5b6d62;--line:#ccd8ca;--orange:#a85b22;--red:#9a3935;--radius:20px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,select,input{touch-action:manipulation}button{cursor:pointer;min-height:46px;border:1px solid var(--line);border-radius:11px;background:white;color:var(--ink);padding:10px 17px;font-weight:650}button:hover{background:var(--pale)}button:disabled{opacity:.5;cursor:default}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #be813e;outline-offset:3px}.primary{background:var(--green);color:white;border-color:var(--green)}.primary:hover{background:#244c39}.quiet{background:transparent}.danger{color:var(--red)}input,select{border:1px solid #9caf9d;border-radius:8px;background:#fff;color:var(--ink);padding:10px;min-height:44px;max-width:100%}input[type=checkbox]{accent-color:var(--green);width:19px;height:19px;min-height:0;margin:0 9px 0 0;vertical-align:middle}input[type=number]{width:110px}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(28px,4vw,40px);letter-spacing:-1.4px;margin-bottom:4px}h2{font-size:23px;letter-spacing:-.5px}h3{font-size:17px}p{line-height:1.65}small,.muted{color:var(--muted)}main{max-width:1080px;margin:auto;padding:38px 28px 50px}.brand{display:flex;align-items:center;gap:17px;margin-bottom:30px}.logo{display:grid;place-items:center;width:62px;height:62px;background:var(--green);color:white;border-radius:19px;font-family:Georgia,serif;font-size:30px}.eyebrow{font-size:11px;font-weight:750;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:7px}.subtitle{margin:0;color:var(--muted);font-size:15px}.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:25px}.mode{text-align:left;padding:18px 20px;background:#f8faf5;border-radius:16px;display:flex;gap:13px;align-items:center}.mode span:first-child{font-size:23px}.mode strong{display:block;font-size:17px}.mode small{display:block;margin-top:4px;font-weight:400}.mode.active{background:var(--green);border-color:var(--green);color:#fff}.mode.active small{color:#e0eadb}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin-bottom:20px}.section-title{display:flex;align-items:center;gap:12px;margin-bottom:22px}.number{border-radius:50%;width:28px;height:28px;display:inline-grid;place-items:center;background:var(--pale);font-size:13px}.section-title h2{margin:0}.columns{display:grid;grid-template-columns:1fr 1fr;gap:30px}.notions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.notion{display:flex;align-items:center;text-align:left;gap:10px;padding:13px 12px;font-weight:500;min-height:60px}.notion.selected{background:var(--pale);border-color:#6f9279;box-shadow:inset 0 0 0 1px #6f9279}.symbol{font:26px Georgia,serif;width:30px;display:inline-grid;place-items:center}.notion .tick{margin-left:auto;font-size:13px}.simplify-choice{display:flex;gap:8px;align-items:center;margin-top:12px;font-size:13px}.simplify-choice select{padding:6px;min-height:38px;flex:1}.denoms{border-top:1px solid var(--line);margin-top:23px;padding-top:22px}.check-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.check-tile{border:1px solid var(--line);border-radius:12px;padding:13px 10px;font-size:14px}.check-tile small{display:block;font-size:11px;margin:7px 0 0 28px;line-height:1.4}.settings{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.field{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600}.field select{width:100%;font-weight:400}.inline{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.settings-footer{margin-top:22px;display:flex;gap:25px;align-items:center;flex-wrap:wrap;font-size:14px}details{border-top:1px solid var(--line);margin-top:22px;padding-top:18px}summary{cursor:pointer;font-weight:650;min-height:30px}details label{display:block;margin-top:16px}details p{font-size:13px;color:var(--muted);margin:8px 0}.start-row{display:flex;align-items:center;justify-content:space-between;gap:16px}.start-row p{font-size:13px;margin:0;max-width:600px}.start-row .primary{padding:15px 32px;font-size:17px}.error{color:var(--red)}[hidden]{display:none!important}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap}.topbar .name{font-size:22px;font-weight:750;letter-spacing:-.5px}.badge{font-size:12px;background:var(--pale);padding:7px 11px;border-radius:30px}.progress{height:5px;background:#d7e2d2;border-radius:4px;margin-bottom:35px;overflow:hidden}.progress>div{height:100%;background:var(--green);transition:width .2s}.exercise-card{padding:35px 22px;text-align:center;min-height:270px}.prompt{color:var(--muted);font-size:16px;margin-bottom:28px}.equation-scroll{overflow-x:auto;padding:12px 0 20px}.equation{display:flex;align-items:center;justify-content:center;gap:.3em;white-space:nowrap;font-family:Georgia,"Times New Roman",serif;font-size:clamp(32px,5.5vw,62px);min-width:max-content;line-height:1.2}.equation.long{font-size:clamp(25px,4.2vw,49px)}.frac{display:inline-flex;flex-direction:column;vertical-align:middle;align-items:stretch;text-align:center;line-height:1.15;min-width:.8em;margin:0 .06em}.frac>.num{border-bottom:2px solid currentColor;padding:0 .13em .1em}.frac>.den{padding:.1em .13em 0}.negative{display:inline-flex;align-items:center;gap:.06em}.answer{min-width:1.3em}.answer input{font-family:inherit;font-size:.66em;width:2.4em;min-width:50px;max-width:115px;height:1.5em;min-height:44px;padding:3px;text-align:center;border-color:#729380;background:#f2f7ef;border-radius:7px;-moz-appearance:textfield}.answer input::-webkit-inner-spin-button{display:none}.answer .num{padding-bottom:.12em}.answer .den{padding-top:.12em}.answer input[readonly]{background:#fff;border-color:transparent}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}.feedback{border-radius:12px;padding:18px 22px;margin-top:18px;text-align:left;line-height:1.6;background:#f6eddf;color:#694c2d}.feedback.good{background:#e6f0e0;color:#2f5b36}.feedback p:last-child{margin-bottom:0}.correction{font-size:clamp(20px,3.2vw,32px);justify-content:flex-start;margin:12px 0;line-height:1.4}.frame-green{outline:2px solid #558465;outline-offset:3px;border-radius:3px}.frame-orange{outline:2px solid #c58548;outline-offset:3px;border-radius:3px}.helpbar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.help-panel{margin-top:20px}.tables{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:15px}.table-lines{line-height:1.9;display:grid;grid-template-columns:repeat(2,1fr);font-size:14px}.common{background:#f4e4c7;border-radius:5px;font-weight:700}.cake-row{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin:22px 0}.cake-wrap{width:min(300px,100%)}.cake{display:grid;grid-template-columns:repeat(var(--parts),1fr);height:70px;border:2px solid #57745c;border-radius:6px;overflow:hidden;margin:8px 0;background:#fff}.cake span{border-right:1px solid #819b82;background:#f4f6f0}.cake span:last-child{border:0}.cake span.fill{background:#83ac7b}.cake.orange span.fill{background:#d8a26c}.cake span.removed{background:repeating-linear-gradient(45deg,#e3b29c,#e3b29c 4px,#f7e3d9 4px,#f7e3d9 8px)}.lesson-text{max-width:720px;margin:0 auto;text-align:left}.lesson-text .equation{justify-content:center}.step-label{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.factor{min-width:38px;padding:4px 8px;min-height:40px;font:inherit}.factor.cancelled{text-decoration:line-through;color:#9b5c39;background:#f5ede2}.factor.selected-factor{outline:3px solid #b77933}.factor-row{display:flex;justify-content:center;align-items:center;gap:6px;min-height:48px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:22px}.stat{padding:24px;border:1px solid var(--line);border-radius:16px;background:#fff}.stat strong{font-size:36px;display:block;font-weight:600;margin:5px 0}.stat span{font-size:13px;color:var(--muted)}.result-row{border-top:1px solid var(--line);padding:20px 0}.result-row:first-child{border:0}.result-row h3{display:flex;justify-content:space-between;gap:10px}.result-row .equation{font-size:25px}.result-row p{font-size:14px}.result-row .correction{font-size:23px}.scoreline{height:8px;border-radius:10px;background:var(--pale);overflow:hidden;margin:8px 0 14px}.scoreline div{height:100%;background:var(--green)}.footer-note{font-size:12px;text-align:center;color:var(--muted);margin-top:24px}dialog{border:1px solid var(--line);border-radius:20px;max-width:450px;padding:28px;color:var(--ink)}dialog::backdrop{background:#203d3266}.calc-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:15px 0}.calc-screen{min-height:75px;padding:12px;border-radius:10px;background:var(--pale);text-align:right;overflow:auto}.calc-screen .equation{font-size:25px;justify-content:flex-end}#timer{font-variant-numeric:tabular-nums}#timer.urgent{background:#f5d9d2;color:#842c22}.notice{padding:12px 15px;background:#f6efdf;border-radius:10px;font-size:13px}.lesson-controls{margin:18px 0}.settings .full{grid-column:1/-1}
+@media(max-width:700px){main{padding:22px 15px 35px}.brand{margin-bottom:23px;gap:12px}.logo{width:49px;height:49px;border-radius:14px;font-size:25px}.subtitle{font-size:12px}.modes{gap:7px}.mode{display:block;padding:12px 9px;text-align:center}.mode span:first-child{display:none}.mode strong{font-size:13px}.mode small{font-size:10px}.card{padding:20px 17px}.columns{gap:22px;grid-template-columns:1fr}.check-grid{grid-template-columns:1fr 1fr}.settings{grid-template-columns:1fr 1fr;gap:16px}.start-row{align-items:stretch;flex-direction:column}.exercise-card{padding:27px 9px}.equation{gap:.2em;font-size:clamp(29px,7.4vw,49px)}.equation.long{font-size:clamp(23px,5.9vw,40px)}.answer input{min-width:39px;width:2em}.stats{gap:8px}.stat{padding:15px 10px}.stat strong{font-size:29px}.stat span{font-size:11px}.topbar .name{font-size:18px}.table-lines{grid-template-columns:1fr}.cake-row{gap:15px}.cake-wrap{width:100%}.settings-footer{gap:16px}.result-row .equation{font-size:23px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}@media print{body{background:#fff}button,.helpbar{display:none}}
+
+/* Composants mathématiques : hauteur symétrique et cadres non rognés. */
+.logo{flex:none;font-size:20px}.logo .frac{line-height:1.05;min-width:1.4em}.logo .num,.logo .den{min-height:1.13em;padding:.03em .16em}.logo .num{border-bottom:2px solid white}
+.frac>.num,.frac>.den{min-height:1.35em;display:flex;align-items:center;justify-content:center;padding:.06em .17em}.frac>.num{border-bottom:2px solid currentColor}.equation{line-height:1.15;gap:.3em}.equation-scroll{padding:16px 10px 22px;max-width:100%;overflow-x:auto}.frame-green,.frame-orange{outline:none;border:2px solid #558465;padding:4px;border-radius:5px}.frame-orange{border-color:#c58548}.frac.frame-green,.frac.frame-orange{margin:0 .09em}.answer input{font-size:.78em;height:1.35em;line-height:1.2;min-height:44px;padding:3px;width:2.6em;max-width:140px}.final-answer input{border:2px solid #547d62}.answer .num,.answer .den{padding:.06em .12em}.signed-answer{display:inline-flex;align-items:center;gap:.05em}.front-sign{font:inherit;font-size:.9em;min-width:30px;width:.85em;min-height:44px;padding:1px 3px;color:var(--ink);border:1px dashed #9caf9d;background:transparent;text-align:center}.front-sign:disabled{opacity:1;border-color:transparent}.signed-fraction{display:inline-flex;align-items:center;gap:.08em;white-space:nowrap}.fraction-sign{font:inherit;line-height:1}
+
+.unary-name{font-family:system-ui,sans-serif;font-size:.6em;white-space:normal;max-width:120px}.lesson-text{max-width:940px}.division-line{font-size:clamp(30px,4vw,46px)}.course-detail{font-size:14px;color:var(--muted)}.correction{line-height:1.15}.math-text{display:inline-block}.lesson-text .equation-scroll .equation{width:max-content;min-width:100%}
+/* Chaîne de rédaction : un retour est possible entre deux blocs d'égalité complets. */
+.writing-note{font-size:12px;color:var(--muted);margin:-8px auto 20px;max-width:680px}.writing-equation{display:flex;align-items:flex-start;justify-content:center;flex-wrap:wrap;gap:14px;font:clamp(30px,3.2vw,42px) Georgia,serif}.math-block{max-width:100%;min-width:0;overflow-x:auto;padding:8px 4px 15px}.math-line{display:flex;gap:.28em;align-items:center;white-space:nowrap;min-height:3.5em;width:max-content;min-width:100%;justify-content:center;padding:4px}.block-label{height:30px;margin-bottom:14px;font:11px system-ui,sans-serif;letter-spacing:.5px;color:var(--muted);display:flex;justify-content:center;align-items:center}.final-block .block-label{font-weight:750;color:var(--green)}.draft-fraction input{width:3em;max-width:220px;min-width:60px;min-height:44px;height:1.4em;padding:4px;text-align:center;font: .72em Georgia,serif;background:#f8faf6;border:1px solid var(--line)}.draft-fraction input:read-only{background:#f0f3eb}.draft-op{appearance:none;-webkit-appearance:none;background-image:none;font:inherit;font-size:.8em;text-align:center;text-align-last:center;padding:3px;min-height:44px;min-width:44px;width:1.4em}.draft-op::-ms-expand{display:none}.draft-tools{display:flex;justify-content:center;gap:7px;align-items:center;font:11px system-ui,sans-serif;margin-top:22px}.draft-tools select{min-height:32px;font-size:11px;padding:4px}.draft-tools button{font-size:11px;min-height:32px;padding:4px 7px}.draft-status{display:block;max-width:260px;white-space:normal;margin:7px auto 0;font:11px system-ui,sans-serif;line-height:1.4}.draft-summary{padding:12px;background:#f4f6f0;border-radius:10px;margin:18px 0}.add-step{font-size:12px;margin:12px 0 20px}
+/* Animation des surfaces : chaque rectangle conserve la même échelle. */
+.equivalence-animation{margin:24px auto;padding:20px;border:1px solid var(--line);border-radius:12px;max-width:420px;text-align:center}.equivalence-legend{display:flex;justify-content:center;gap:22px;align-items:center;font:26px Georgia,serif;margin-bottom:15px}.green-label{color:var(--green)}.orange-label{color:var(--orange)}.equivalence-stage{position:relative;max-width:290px;margin:0 auto;overflow:visible}.equivalence-layer{position:absolute;top:0;left:0;width:100%;height:var(--layer-height)}.equivalence-layer svg{display:block;width:100%;height:100%;stroke:#4d6952;stroke-width:1}.green-layer .quantity-fill{fill:#83ac7b;stroke:none}.orange-layer .quantity-fill{fill:#d8a26c;stroke:none}.orange-layer{opacity:.6;transform:translateY(0)}.running .orange-layer{animation:coincide 2.7s ease-in-out both}.running .subdivision{animation:subdivide 2.7s linear both}.equivalence-caption{font-size:14px;margin:12px 0}.equivalence-stage.running+.equivalence-caption{animation:caption 2.7s both}@keyframes coincide{0%,30%{transform:translateY(var(--separation));opacity:1}85%,100%{transform:translateY(0);opacity:.55}}@keyframes subdivide{0%,10%{opacity:0}35%,100%{opacity:1}}@keyframes caption{0%,85%{opacity:0}100%{opacity:1}}
+/* Calculatrice compacte : colonne latérale, ou fenêtre basse sur petit écran. */
+.session-grid,.session-main{min-width:0}.has-calculator{max-width:1400px}.has-calculator .session-grid{display:grid;grid-template-columns:minmax(0,1fr)250px;align-items:start;gap:18px}#calculator-panel{position:sticky;top:20px}.compact-calculator{background:#f5f7f1;border:1px solid #a8baab;border-radius:13px;padding:12px;box-shadow:0 5px 20px #203d3217}.compact-calculator header{display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:8px}.compact-calculator header button{min-height:28px;min-width:30px;padding:0;font-size:21px;border:0;background:transparent}.compact-calculator .calc-screen{border:1px solid var(--line);padding:8px;min-height:66px;max-height:90px;line-height:1.4}.compact-calculator #calc-expression{font-size:12px;overflow-wrap:anywhere}.compact-calculator #calc-result{display:block;font-size:22px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.compact-calculator .calc-keys{gap:4px;margin:8px 0 0}.compact-calculator .calc-keys button{font-size:20px;min-height:42px;padding:2px;border-radius:5px}.zero-key{grid-column:span 3}
+@media(max-width:1000px){.has-calculator .session-grid{display:block}.has-calculator .session-main{padding-bottom:380px}#calculator-panel{position:fixed;z-index:20;width:242px;max-width:calc(100vw - 24px);right:12px;bottom:12px;top:auto;max-height:46dvh;overflow-y:auto;border-radius:13px}.compact-calculator .calc-keys button{min-height:34px}.compact-calculator .calc-screen{min-height:52px}.answer input,.draft-fraction input{scroll-margin-top:20px}}
+@media(max-width:700px){.writing-equation{font-size:30px;gap:3px}.math-block{padding:5px 1px 14px}.draft-fraction input{min-width:49px;width:2.7em}.draft-tools{gap:5px}.logo{font-size:17px}.division-line{font-size:30px}.unary-name{font-size:.55em;max-width:80px}.equation.correction{font-size:25px}}
+@media(prefers-reduced-motion:reduce){.running .orange-layer,.running .subdivision,.equivalence-stage.running+.equivalence-caption{animation:none}}
+.answer input{font-size:1em;height:1.22em;width:2.1em}.draft-fraction input{font-size:1em;height:1.22em;width:2.2em}
+@media(max-width:700px){.math-line{gap:.14em}.draft-fraction>.num,.draft-fraction>.den{padding:.06em .06em}.draft-fraction input{min-width:43px;width:1.7em}.draft-op{min-width:32px;width:32px;padding:2px}}
+@media(max-width:700px){.block-label{margin-bottom:9px}.draft-tools{margin-top:15px}.add-step{margin-top:6px}.division-line{justify-content:flex-start}.equal-instruction{font-size:15px}}
+@media(max-width:360px){.writing-equation{font-size:28px}}
+.equal-instruction{font-weight:650;margin:20px 0 10px}.learning-end{text-align:center;padding:45px 24px}.learning-end p{max-width:650px;margin:20px auto}
+.answer input:disabled{opacity:.6;background:#f4f6f0;border-color:#a8baab}
+</style>
+</head>
+<body>
+<main>
+<section id="home">
+ <header class="brand"><div class="logo" aria-hidden="true"><span class="frac"><span class="num">14</span><span class="den">2</span></span></div><div><div class="eyebrow">L'entraînement fait la différence</div><h1>Muscu Fractions</h1><p class="subtitle">Comprendre · S'entraîner · Progresser</p></div></header>
+ <nav class="modes" aria-label="Mode pédagogique" id="modes"></nav>
+ <div class="card"><div class="section-title"><span class="number">1</span><h2>Je choisis mes notions</h2></div>
+ <div class="columns"><div><h3>Opérations</h3><div class="notions" id="operations"></div></div><div><h3>Autour des fractions</h3><div class="notions" id="around"></div><div class="simplify-choice" id="simplify-level"><label for="level">Simplification</label><select id="level"><option value="1">Niveau 1 · Diviseur évident</option><option value="2">Niveau 2 · Plusieurs étapes</option><option value="3">Niveau 3 · Facteurs premiers</option></select></div></div></div>
+ <div class="denoms" id="denoms"><h3>Quels types de dénominateurs ?</h3><div class="check-grid" id="denom-choices"></div></div>
+ <label id="integer-option" class="inline" style="margin-top:20px"><input id="mixIntegers" type="checkbox">Inclure des opérations entre une fraction et un entier (× et ÷)</label>
+ </div>
+ <div class="card"><div class="section-title"><span class="number">2</span><h2>Je prépare ma séance</h2></div>
+ <div class="settings">
+ <label class="field" id="count-field">Nombre de questions<select id="count"><option value="10">10 questions</option><option value="20">20 questions</option></select></label>
+ <label class="field">Nombres<select id="numbers"><option value="positive">Entiers · nombres non négatifs</option><option value="signed">Relatifs · négatifs autorisés</option></select></label>
+ <label class="field" id="calculator-field">Calculatrice<select id="calculator"><option value="no">Sans calculatrice</option><option value="yes">Avec calculatrice</option></select></label>
+ <label class="field" id="time-field">Temps<select id="time"><option value="none">Sans limite</option><option value="q20">20 s par question</option><option value="q30">30 s par question</option><option value="q60">60 s par question</option><option value="q90">90 s par question</option><option value="t5">5 minutes au total</option><option value="t10">10 minutes au total</option><option value="t15">15 minutes au total</option><option value="t20">20 minutes au total</option><option value="t30">30 minutes au total</option></select></label>
+ </div><div class="settings-footer"><label><input type="checkbox" id="irreducible">Exiger une fraction irréductible</label><button class="quiet" id="reset">Réinitialiser les paramètres</button></div>
+ <details id="advanced"><summary>Options avancées</summary><div id="progressive-field"><label><input type="checkbox" id="progressive">Difficulté progressive</label><p>Selon vos réussites, les catégories peuvent s'élargir : dénominateurs, entiers, trois termes, puis relatifs. Seules vos notions sont utilisées. Le niveau de simplification reste celui choisi.</p></div><div id="priority-field"><label><input type="checkbox" id="priority">Priorités opératoires</label><p>Trois termes au maximum : une addition ou soustraction et une multiplication ou division. Cette option autorise le mélange de ces opérations.</p></div></details>
+ </div>
+ <div class="start-row"><p id="mode-description"></p><button class="primary" id="start">Commencer <span aria-hidden="true">→</span></button></div><p id="config-error" class="error" role="alert"></p><p class="footer-note">Pour une réponse entière, laissez le dénominateur vide (il vaudra 1).</p><p class="footer-note">100 % hors ligne · Aucun compte · Seuls vos réglages sont mémorisés sur cet appareil.</p>
+</section>
+<section id="session" hidden><header class="topbar"><div><span class="name">Muscu Fractions</span> <span id="mode-badge" class="badge"></span></div><div class="inline"><span id="question-counter" class="muted"></span><span id="timer" class="badge" hidden role="timer"></span><button id="quit" class="quiet">Accueil</button></div></header><div class="progress"><div id="progress-bar"></div></div><div class="session-grid"><div class="session-main"><div id="work"></div><div id="help"></div></div><aside id="calculator-panel" hidden aria-label="Calculatrice"></aside></div></section>
+<section id="results" hidden></section>
+<dialog id="interrupt-dialog"><h2>Interrompre l'évaluation ?</h2><p>Les réponses validées seront conservées dans le bilan. Les questions restantes compteront comme sans réponse.</p><div class="actions"><button id="cancel-interrupt">Continuer</button><button id="confirm-interrupt" class="danger">Interrompre</button></div></dialog>
+</main>
+<script>
+'use strict';
+// 1. Configuration : aucune réponse ni note n'est enregistrée localement.
+const $=id=>document.getElementById(id);
+const META={add:['Addition','+'],sub:['Soustraction','−'],mul:['Multiplication','×'],div:['Division','÷'],equal:['Fractions égales','='],simplify:['Simplification','simplify'],opposite:['Opposé','±'],inverse:['Inverse','⇅']};
+const MODE={learn:["J'apprends","Un parcours guidé, à votre rythme."],train:["Je m'entraîne","Des essais, des aides et des progrès."],eval:["Je m'évalue","Un bilan pour mesurer mes acquis."]};
+const CATS={same:['Égaux','Les mêmes dénominateurs'],multiple:['Multiples',"L'un est multiple de l'autre"],any:['Quelconques','Ni égaux, ni multiples'],integer:['Fraction et entier','Dans les deux ordres']};
+const DEFAULT={mode:'learn',topics:['add'],cats:['multiple'],level:1,count:20,numbers:'positive',calculator:'no',time:'none',irreducible:false,progressive:false,priority:false,mixIntegers:false};
+// Emplacements réservés aux futures fiches fournies par l'enseignant.
+// Une URL data:application/pdf;base64,... permettra de conserver le fichier autonome.
+const LESSON_DOCUMENTS={mul:null,div:null};
+let cfg=structuredClone(DEFAULT),S=null,ticker=null,helpOpen='',lesson=null;
+try{const saved=JSON.parse(localStorage.getItem('muscu-fraction-config'));if(saved){for(const k of Object.keys(DEFAULT))if(typeof saved[k]===typeof DEFAULT[k])cfg[k]=saved[k];cfg.topics=cfg.topics.filter(k=>META[k]);cfg.cats=cfg.cats.filter(k=>CATS[k]);if(!MODE[cfg.mode])cfg.mode='learn';if(![1,2,3].includes(+cfg.level))cfg.level=1;if(![10,20].includes(+cfg.count))cfg.count=20;if(!['positive','signed'].includes(cfg.numbers))cfg.numbers='positive';if(!['yes','no'].includes(cfg.calculator))cfg.calculator='no';if(!/^(none|q(20|30|60|90)|t(5|10|15|20|30))$/.test(cfg.time))cfg.time='none';}}catch{}
+function save(){try{localStorage.setItem('muscu-fraction-config',JSON.stringify(cfg));}catch{}}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function icon(k){if(k==='inverse')return '<svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><path d="M12 27C2 25 3 9 12 5m-6 0h6v6M20 5c10 2 9 18 0 22m6 0h-6v-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';return k==='simplify'?'<svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><path d="M2 16h13M5 5h5v7H5zM5 20h5v7H5zM18 8h12m-4-4 4 4-4 4M18 24h12m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>':META[k][1];}
+function renderConfig(){
+ $('modes').innerHTML=Object.entries(MODE).map(([k,v],i)=>`<button class="mode ${cfg.mode===k?'active':''}" data-mode="${k}" aria-pressed="${cfg.mode===k}"><span aria-hidden="true">${['▤','↗','✓'][i]}</span><span><strong>${v[0]}</strong><small>${v[1]}</small></span></button>`).join('');
+ for(const [id,keys] of [['operations',['add','sub','mul','div']],['around',['equal','simplify','opposite','inverse']]])$(id).innerHTML=keys.map(k=>`<button class="notion ${cfg.topics.includes(k)?'selected':''}" aria-pressed="${cfg.topics.includes(k)}" data-topic="${k}"><span class="symbol" aria-hidden="true">${icon(k)}</span><span>${META[k][0]}</span><span class="tick" aria-hidden="true">${cfg.topics.includes(k)?'✓':''}</span></button>`).join('');
+ $('denom-choices').innerHTML=Object.entries(CATS).map(([k,v])=>`<label class="check-tile"><input type="checkbox" data-cat="${k}" ${cfg.cats.includes(k)?'checked':''}>${v[0]}<small>${v[1]}</small></label>`).join('');
+ for(const key of ['level','count','numbers','calculator','time'])$(key).value=cfg[key];
+ for(const key of ['irreducible','progressive','priority','mixIntegers'])$(key).checked=cfg[key];
+ const learning=cfg.mode==='learn', sums=cfg.topics.some(k=>['add','sub'].includes(k)),ops=cfg.topics.some(k=>['add','sub','mul','div'].includes(k));
+ $('denoms').hidden=!sums;$('integer-option').hidden=!cfg.topics.some(k=>['mul','div'].includes(k));$('simplify-level').hidden=!cfg.topics.includes('simplify');
+ for(const id of ['count-field','calculator-field','time-field'])$(id).hidden=learning;
+ $('advanced').hidden=learning||!ops;$('progressive-field').hidden=cfg.mode!=='train';$('priority-field').hidden=!ops;
+ $('mode-description').textContent=learning?"Observez, manipulez les schémas et complétez 5 exercices guidés. Sans note ni chronomètre.":cfg.mode==='train'?"Le premier essai compte pour le score initial. Vous pouvez ensuite vous corriger.":"Une seule réponse par question. Un retour immédiat, puis votre évaluation en PDF.";
+ $('config-error').textContent='';
+}
+// 2. Arithmétique rationnelle exacte (BigInt), y compris pour les saisies élèves.
+function gcd(a,b){a=BigInt(a);b=BigInt(b);a=a<0n?-a:a;b=b<0n?-b:b;while(b){[a,b]=[b,a%b];}return a;}
+function raw(n,d=1){n=BigInt(n);d=BigInt(d);if(!d)throw Error('Le dénominateur ne peut pas être nul.');return {n,d};}
+function rat(n,d=1){let r=raw(n,d);if(r.d<0n){r.n=-r.n;r.d=-r.d;}const g=gcd(r.n,r.d);return {n:r.n/g,d:r.d/g};}
+const add=(a,b)=>rat(a.n*b.d+b.n*a.d,a.d*b.d),sub=(a,b)=>rat(a.n*b.d-b.n*a.d,a.d*b.d),mul=(a,b)=>rat(a.n*b.n,a.d*b.d),inverse=a=>{if(!a.n)throw Error('Zéro n’a pas d’inverse.');return rat(a.d,a.n);},divide=(a,b)=>mul(a,inverse(b)),opposite=a=>rat(-a.n,a.d);
+const eq=(a,b)=>a.n*b.d===b.n*a.d, irreducible=a=>gcd(a.n,a.d)===1n;
+const OP={add,sub,mul,div:divide};
+const displayedInverse=a=>a.n<0n?raw(-a.d,-a.n):raw(a.d,a.n);
+function evaluate(terms,ops){let ts=[rat(terms[0].n,terms[0].d)],low=[];for(let i=0;i<ops.length;i++){if(['mul','div'].includes(ops[i]))ts[ts.length-1]=OP[ops[i]](ts.at(-1),terms[i+1]);else{low.push(ops[i]);ts.push(rat(terms[i+1].n,terms[i+1].d));}}return low.reduce((v,o,i)=>OP[o](v,ts[i+1]),ts[0]);}
+const lcm=(a,b)=>a/gcd(a,b)*b;
+const rand=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),pick=a=>a[rand(0,a.length-1)];
+const abs=a=>a<0n?-a:a;
+function primes(n){n=abs(BigInt(n));const a=[];for(let p=2n;p*p<=n;p++)while(n%p===0n){a.push(p);n/=p;}if(n>1n)a.push(n);return a.length?a:[1n];}
+// 3. Génération indépendante de l'affichage. Les catégories portent sur les termes affichés.
+function numberSign(n,c){return c.numbers==='signed'&&Math.random()<.4?-n:n;}
+function fraction(c,proper=false){const max=c.mode==='learn'?6:c.calculator==='yes'?24:10,d=rand(2,max),n=rand(1,proper?d-1:max);return raw(numberSign(n,c),d);}
+function makePair(c,cat){let a=fraction(c,c.mode==='learn'),b=fraction(c,c.mode==='learn');
+ if(cat==='same')b.d=a.d;
+ if(cat==='multiple'){b.d=a.d*BigInt(rand(2,c.mode==='learn'?2:4));if(Math.random()<.5)[a,b]=[b,a];}
+ if(cat==='any'){let tries=0;while((a.d===b.d||a.d%b.d===0n||b.d%a.d===0n)&&tries++<200)b=fraction(c,c.mode==='learn');if(tries>=200){a.d=3n;b.d=4n;}}
+ if(cat==='integer'){b=raw(numberSign(rand(1,c.mode==='learn'?2:9),c));if(Math.random()<.5)[a,b]=[b,a];}
+ return [a,b];
+}
+function effectiveConfig(){let c={...S.c,topics:[...S.c.topics],cats:[...S.c.cats]};if(c.mode==='train'&&c.progressive){const level=S.difficulty;if(level===0)c.cats=['same'];if(level===1)c.cats=['multiple'];if(level===2)c.cats=['any'];if(level>=3)c.cats=['same','multiple','any','integer'];if(level>=5)c.numbers='signed';}return c;}
+function generate(c,forcedTopic){const topic=forcedTopic||pick(c.topics);let q={topic,terms:[],ops:[],category:null,variant:0,factors:null};
+ if(OP[topic]){q.category=['add','sub'].includes(topic)?pick(c.cats):c.mixIntegers&&Math.random()<.45?'integer':'any';q.terms=makePair(c,q.category);q.ops=[topic];
+ if(topic==='sub'&&c.numbers==='positive'&&q.terms[0].n*q.terms[1].d<q.terms[1].n*q.terms[0].d)q.terms.reverse();
+ const priority=c.mode!=='learn'&&c.priority;
+ if(priority){let hi=['mul','div'].includes(topic)?topic:pick(['mul','div']),lo=['add','sub'].includes(topic)?topic:pick(['add','sub']);q.ops=Math.random()<.5?[lo,hi]:[hi,lo];q.terms.push(fraction(c));q.priority=true;while(c.numbers==='positive'&&evaluate(q.terms,q.ops).n<0n)q.terms[0].n*=2n;}
+ else if(c.mode==='train'&&c.progressive&&S.difficulty>=4){if(['add','sub'].includes(topic)){let third=q.category==='integer'?raw(rand(1,3)):raw(rand(1,5),q.terms[1].d);q.terms.push(third);q.ops.push(topic);if(c.numbers==='positive'&&evaluate(q.terms,q.ops).n<0n)q.terms[0]=raw(30);}else{q.terms.push(fraction(c));q.ops.push(topic);}}
+ q.expected=evaluate(q.terms,q.ops);
+ }else if(topic==='simplify'){let base=rat(rand(1,9),rand(2,10));if(base.d===1n)base=rat(3,7);const factor=c.level===1?pick([2,3,5,10]):c.level===2?pick([12,18,21,24,28,36]):pick([30,42,60]);q.terms=[raw(numberSign(Number(base.n)*factor,c),Number(base.d)*factor)];if(c.level===3){const a=rand(2,7),b=rand(2,7),z=rand(2,5),w=rand(2,5);q.factors=[[a*z,b],[a,b*w]];q.terms=[raw(a*z*b,a*b*w)];if(c.numbers==='signed'&&Math.random()<.4){q.factors[0][0]*=-1;q.terms[0].n*=-1n;}}q.expected=rat(q.terms[0].n,q.terms[0].d);q.level=c.level;
+ }else if(topic==='equal'){
+  const variant=rand(0,4),a=variant===3?raw(numberSign(rand(1,8),c)):fraction(c);
+  configureEquality(q,c,a,variant,BigInt(rand(2,5)));
+ 
+}else{let a=Math.random()<.3?raw(numberSign(rand(1,9),c)):fraction(c);q.terms=[a];q.expected=topic==='opposite'?opposite(a):inverse(a);}
+ return q;
+}
+// Une même règle de construction des égalités est partagée par les trois modes.
+function configureEquality(q,c,a,variant,factor){
+ q.variant=variant;
+ if(c.irreducible&&variant<2){const simple=rat(a.n,a.d);a=raw(simple.n*factor,simple.d*factor);if(variant===0)q.fixedD=simple.d;else q.fixedN=simple.n;}
+ else{if(variant===0)q.fixedD=a.d*factor;if(variant===1)q.fixedN=a.n*factor;}
+ q.terms=[a];q.expected=rat(a.n,a.d);
+}
+const LEARNING_COUNT=5;
+function learningKind(index,encounters){return index<3||encounters===0||Math.random()<.65?'classic':'variation';}
+function classicFraction(c,denominators){const d=pick(denominators);return raw(numberSign(rand(2,Math.min(9,d-1)),c),d);}
+function classicPair(c,category,index){
+ const denominators=index<2?[3,4,5,6,8]:[3,4,5,6,8,10,12];let d,e;
+ if(category==='same')d=e=pick(denominators);
+ else if(category==='multiple'){d=pick([3,4,5,6]);e=d*rand(2,3);if(Math.random()<.5)[d,e]=[e,d];}
+ else if(category==='integer'){let a=classicFraction(c,denominators),b=raw(numberSign(rand(2,4),c));return Math.random()<.5?[a,b]:[b,a];}
+ else{const pairs=[];for(const a of denominators)for(const b of denominators)if(a!==b&&a%b&&b%a&&Number(lcm(BigInt(a),BigInt(b)))<=(index<2?30:60))pairs.push([a,b]);[d,e]=pick(pairs);}
+ return [classicFraction(c,[d]),classicFraction(c,[e])];
+}
+function isClassicLearning(q){
+ if(q.terms.some(a=>!a.n||abs(a.n)===a.d))return false;
+ if(q.terms.some(a=>a.d===1n?q.category!=='integer':abs(a.n)<2n||a.n%a.d===0n))return false;
+ if(OP[q.topic]&&(!q.expected.n||q.expected.d===1n))return false;
+ if(['opposite','inverse'].includes(q.topic)){const a=rat(q.terms[0].n,q.terms[0].d);if(abs(a.n)<2n||a.d<2n)return false;}
+ return true;
+}
+function generateLearning(c,topic,kind,index){
+ if(kind==='variation'){const q=generate(c,topic);q.learningKind=kind;return q;}
+ for(let attempt=0;attempt<200;attempt++){
+  const q={topic,terms:[],ops:[],category:null,variant:0,factors:null,learningKind:kind};
+  if(OP[topic]){
+   q.category=['add','sub'].includes(topic)?pick(c.cats):'any';q.terms=classicPair(c,q.category,index);q.ops=[topic];
+   if(topic==='sub'&&c.numbers==='positive'&&q.terms[0].n*q.terms[1].d<q.terms[1].n*q.terms[0].d)q.terms.reverse();
+   q.expected=evaluate(q.terms,q.ops);
+  }else if(topic==='simplify'){
+   let n,d;do{n=rand(2,5);d=rand(n+1,9);}while(gcd(n,d)!==1n);
+   const factor=c.level===1?pick([2,3,5]):pick([6,12,15]);q.terms=[raw(numberSign(n*factor,c),d*factor)];q.level=c.level;
+   if(c.level===3){const a=rand(2,5),b=rand(2,5);let z,w;do{z=rand(2,5);w=rand(2,5);}while(z===w||gcd(z,w)!==1n);q.factors=[[a*z,b],[a,b*w]];q.terms=[raw(a*z*b,a*b*w)];if(c.numbers==='signed'&&Math.random()<.4){q.factors[0][0]*=-1;q.terms[0].n*=-1n;}}
+   q.expected=rat(q.terms[0].n,q.terms[0].d);
+  }else if(topic==='equal')configureEquality(q,c,classicFraction(c,[3,4,5,6,8,10]),pick([0,1,2,4]),BigInt(rand(2,5)));
+  else{const a=classicFraction(c,[3,4,5,6,8,10]);q.terms=[a];q.expected=topic==='opposite'?opposite(a):inverse(a);}
+  if(isClassicLearning(q))return q;
+ }
+ throw Error('Impossible de construire cet exercice d’apprentissage avec ces paramètres.');
+}
+function fingerprint(q){return [q.topic,q.terms.map(a=>a.n+':'+a.d).join(','),q.ops.join(','),q.variant].join('|');}
+function nextQuestion(){
+ const c=effectiveConfig(),topic=S.plan[S.index],encounters=S.learningEncounters[topic]||0;
+ const kind=c.mode==='learn'?learningKind(S.index,encounters):null;let q,key;
+ for(let i=0;i<40;i++){q=c.mode==='learn'?generateLearning(c,topic,kind,S.index):generate(c,topic);key=fingerprint(q);if(!S.seen.has(key))break;}
+ S.seen.add(key);if(c.mode==='learn')S.learningEncounters[topic]=encounters+1;
+ q.first=null;q.final=false;q.answered=false;q.attempts=[];q.diagnostic='';q.presented=true;q.drafts=defaultDrafts(q);
+ S.questions[S.index]=q;S.q=q;S.locked=false;S.phase='answer';S.qStart=Date.now();S.qAnsweredAt=null;
+ if(c.mode==='learn')initLesson();renderQuestion();
+}
+
+// 4. Affichage : fractions verticales dans tous les supports.
+function fractionView(a,placement='front'){
+ const numeric=v=>typeof v==='bigint'||/^[+-]?[0-9]+$/.test(String(v));
+ if(!numeric(a.n)||!numeric(a.d))return {n:String(a.n),d:String(a.d),sign:''};
+ let n=BigInt(a.n),d=BigInt(a.d);const negative=(n<0n)!==(d<0n)&&n!==0n;n=abs(n);d=abs(d);
+ if(placement==='numerator')return {n:(negative?'−':'')+n,d:String(d),sign:''};
+ if(placement==='denominator')return {n:String(n),d:(negative?'−':'')+d,sign:''};
+ return {n:String(n),d:String(d),sign:negative?'−':''};
+}
+function frac(a,force=false,cls='',placement='front'){
+ const view=fractionView(a,placement);
+ if(view.d==='1'&&!force)return '<span class="integer '+cls+'">'+esc(view.sign+view.n)+'</span>';
+ const body='<span class="frac '+cls+'"><span class="num">'+esc(view.n)+'</span><span class="den">'+esc(view.d)+'</span></span>';
+ return view.sign?'<span class="signed-fraction"><span class="fraction-sign">'+view.sign+'</span>'+body+'</span>':body;
+}
+function expression(q,terms=q.terms,ops=q.ops){return tokensHTML(exprTokens(q,terms,ops));}
+function fractionFields(prefix,{label='Réponse finale',n,d,cls='answer final-answer'}={}){
+ const input=(part,value)=>'<input id="'+prefix+part+'" aria-label="'+(part==='N'?'Numérateur':'Dénominateur')+' · '+esc(label)+'" inputmode="text" autocomplete="off" maxlength="10" '+(value!==undefined?'value="'+value+'" readonly':'')+'>';
+ return '<span class="frac '+cls+'"><span class="num">'+input('N',n)+'</span><span class="den">'+input('D',d)+'</span></span>';
+}
+function answerMarkup(q,prefix='ans'){
+ const sign=prefix==='ans'?'<button type="button" class="front-sign" id="ansSign" data-sign="" aria-label="Signe devant la fraction : aucun. Espace pour changer ; touches moins et plus acceptées."></button>':'';
+ return '<span class="signed-answer">'+sign+fractionFields(prefix,{n:q.fixedN,d:q.fixedD})+'</span>';
+}
+function operationSelect(id,value,label,attributes=''){
+ return '<select class="draft-op" id="'+id+'" aria-label="'+esc(label)+'" '+attributes+'>'+Object.keys(OP).map(k=>'<option value="'+k+'" '+(value===k?'selected':'')+'>'+META[k][1]+'</option>').join('')+'</select>';
+}
+function setFrontSign(sign){const button=$('ansSign');if(!button)return;button.dataset.sign=sign;button.textContent=sign;button.setAttribute('aria-label','Signe devant la fraction : '+(sign==='−'?'moins':sign==='+'?'plus':'aucun')+'. Espace pour changer ; touches moins et plus acceptées.');}
+
+function unaryPrefix(q){return q.topic==='opposite'?'Opposé de':q.topic==='inverse'?'Inverse de':'';}
+function solvedTokens(q,a){return [...(unaryPrefix(q)?[T(unaryPrefix(q))]:[]),...exprTokens(q),T('='),F(a)];}
+// Rédaction facultative : les étapes ne sont jamais utilisées par validate() ni par la note.
+function defaultDrafts(q){if(!q.ops.length)return [];const n=q.ops.length===1&&q.ops[0]==='mul'?1:2;
+ const i=q.ops.findIndex(o=>['mul','div'].includes(o));
+ const op=q.ops.length===2?q.ops[i===0?1:0]:q.ops[0]==='div'?'mul':q.ops[0];
+ return [{terms:Array.from({length:n},()=>({n:'',d:''})),ops:n===2?[op]:[]}];
+}
+function draftExists(step){return step.terms.some(f=>f.n.trim()||f.d.trim());}
+function captureDrafts(){if(!S?.q||S.c.mode==='learn')return;for(let i=0;i<S.q.drafts.length;i++){
+ const st=S.q.drafts[i];st.terms.forEach((f,j)=>{for(const k of ['n','d']){const input=$('draft-'+i+'-'+j+'-'+k);if(input)f[k]=input.value;}});
+ st.ops.forEach((_,j)=>{const input=$('draft-op-'+i+'-'+j);if(input)st.ops[j]=input.value;});
+}}
+function draftTokens(step){const ts=[];step.terms.forEach((f,i)=>{if(i)ts.push(T(META[step.ops[i-1]][1]));ts.push(F({n:f.n.trim()||'?',d:f.d.trim()|| (f.n.trim()?'1':'?')}));});return ts;}
+function draftState(q,step){if(!draftExists(step))return {kind:'empty',text:'Étape laissée vide · non notée'};
+ try{const terms=step.terms.map(f=>{if(!f.n.trim())throw Error('incomplete');const n=parseArithmetic(f.n,false,true),d=parseArithmetic(f.d.trim()||'1',false,true);if(n.d!==1n||d.d!==1n)throw Error('integer');return raw(n.n,d.n);});return eq(evaluate(terms,step.ops),q.expected)?{kind:'good',text:'Égalité vérifiée · étape non notée'}:{kind:'wrong',text:'Égalité à revoir · aucune incidence sur la note'};}catch{return {kind:'partial',text:'Étape incomplète ou écriture à revoir · non notée'};}
+}
+function draftBlock(q,step,i){return '<div class="math-block draft-block"><div class="block-label">Étape '+(i+1)+' · facultative</div><div class="math-line"><span>=</span>'+step.terms.map((f,j)=>(j?operationSelect('draft-op-'+i+'-'+(j-1),step.ops[j-1],'Opération de l’étape '+(i+1)):'')+'<span class="frac draft-fraction"><span class="num"><input id="draft-'+i+'-'+j+'-n" value="'+esc(f.n)+'" aria-label="Étape '+(i+1)+', numérateur '+(j+1)+'" inputmode="text" maxlength="48" placeholder="…"></span><span class="den"><input id="draft-'+i+'-'+j+'-d" value="'+esc(f.d)+'" aria-label="Étape '+(i+1)+', dénominateur '+(j+1)+'" inputmode="text" maxlength="48" placeholder="…"></span></span>').join('')+'</div><div class="draft-tools"><label>Forme <select data-draft-size="'+i+'" aria-label="Nombre de fractions à l’étape '+(i+1)+'">'+[1,2,3].map(n=>'<option '+(step.terms.length===n?'selected':'')+' value="'+n+'">'+n+' fraction'+(n>1?'s':'')+'</option>').join('')+'</select></label><button type="button" class="quiet" data-remove-step="'+i+'" aria-label="Retirer l’étape '+(i+1)+'">Retirer</button></div><small class="draft-status" id="draft-status-'+i+'"></small></div>';}
+function writingMarkup(q){if(!q.ops.length)return '<div class="equation-scroll">'+qEquation(q)+'</div>';
+ return '<p class="writing-note">Vos étapes sont facultatives. Seule la réponse finale est notée. Les champs acceptent des entiers ou des calculs, par exemple 2 × 5.</p><div class="writing-equation"><div class="math-block"><div class="block-label">Calcul initial</div><div class="math-line">'+expression(q)+'</div></div>'+q.drafts.map((st,i)=>draftBlock(q,st,i)).join('')+'<div class="math-block final-block"><div class="block-label">Réponse finale · notée</div><div class="math-line"><span>=</span>'+answerMarkup(q)+'</div></div></div><button class="quiet add-step" type="button" id="add-step">+ Ajouter une étape</button>';
+}
+function bindDrafts(){if(!S.q.ops.length)return;
+ const rerender=()=>{const n=$('ansN')?.value||'',d=$('ansD')?.value||'',sign=$('ansSign')?.dataset.sign||'';$('writing-zone').innerHTML=writingMarkup(S.q);bindAnswerKeys();bindDrafts();$('ansN').value=n;$('ansD').value=d;setFrontSign(sign);};
+ document.querySelectorAll('[data-draft-size]').forEach(el=>el.onchange=()=>{captureDrafts();const st=S.q.drafts[+el.dataset.draftSize],n=+el.value;while(st.terms.length<n)st.terms.push({n:'',d:''});st.terms.length=n;while(st.ops.length<n-1)st.ops.push('add');st.ops.length=n-1;rerender();});
+ document.querySelectorAll('[data-remove-step]').forEach(el=>el.onclick=()=>{captureDrafts();S.q.drafts.splice(+el.dataset.removeStep,1);rerender();});
+ $('add-step').disabled=S.q.drafts.length>=8;$('add-step').onclick=()=>{captureDrafts();S.q.drafts.push({terms:[{n:'',d:''}],ops:[]});rerender();};
+ document.querySelectorAll('.draft-fraction input,.draft-op').forEach(el=>el.oninput=captureDrafts);
+}
+function showDraftStates(){S.q.drafts.forEach((st,i)=>{const el=$('draft-status-'+i);if(el)el.textContent=draftState(S.q,st).text;});}
+function draftsSummaryHTML(q){const steps=(q.drafts||[]).filter(draftExists);if(!steps.length)return '';return '<div class="draft-summary"><h3>Vos étapes · non notées</h3>'+steps.map(st=>'<p class="muted">'+draftState(q,st).text+'</p><div class="equation-scroll"><div class="equation correction">'+tokensHTML(draftTokens(st))+'</div></div>').join('')+'</div>';}
+
+function questionLabel(q){return q.topic==='equal'?'Complétez cette égalité.':q.topic==='simplify'?`Simplifiez cette fraction · Niveau ${q.level}`:q.topic==='opposite'?"Écrivez l'opposé de ce nombre.":q.topic==='inverse'?"Écrivez l'inverse de ce nombre.":q.priority?'Calculez en respectant les priorités.':'Calculez et complétez le résultat.';}
+function qEquation(q,answer=true){return '<div class="equation '+(q.terms.length>2?'long':'')+'">'+(unaryPrefix(q)?'<span class="unary-name">'+unaryPrefix(q)+'</span>':'')+expression(q)+'<span>=</span>'+(answer?answerMarkup(q):frac(q.expected,true))+'</div>';}
+function divisionLessonMarkup(q){
+ const x=q.terms[0],y=q.terms[1];
+ return '<div class="equation-scroll"><div class="equation division-line">'+tokensHTML([F(x,'frame-green'),T('÷'),F(y,'frame-orange'),T('='),F(x,'frame-green')])+operationSelect('division-operation',lesson.division.operation,'Opération de la transformation')+fractionFields('divInverse',{label:'Inverse du diviseur',cls:'answer frame-orange'})+'<span>=</span>'+answerMarkup(q)+'</div></div>';
+}
+function bindDivisionLesson(){
+ const state=lesson.division,form=$('lesson-answer'),op=$('division-operation');bindAnswerKeys();
+ $('divInverseN').value=state.n;$('divInverseD').value=state.d;
+ op.disabled=state.verified;for(const id of ['divInverseN','divInverseD'])$(id).readOnly=state.verified;
+ for(const id of ['ansN','ansD','ansSign'])$(id).disabled=!state.verified;
+ const button=form.querySelector('[type="submit"]');button.textContent=state.verified?'Valider le résultat':'Vérifier la transformation';
+ const capture=()=>{state.operation=op.value;state.n=$('divInverseN').value;state.d=$('divInverseD').value;};
+ op.onchange=capture;for(const id of ['divInverseN','divInverseD'])$(id).oninput=capture;
+ if(state.verified){bindLessonFinal();return;}
+ form.onsubmit=e=>{e.preventDefault();capture();try{
+  if(state.operation!=='mul'){lessonFeedback('Remplace la division par une multiplication. La première fraction verte reste inchangée.');return;}
+  const a=readAnswer('divInverse');if(!eq(a,inverse(S.q.terms[1]))){lessonFeedback('Inverse seulement le diviseur orange : échange son numérateur et son dénominateur.');return;}
+  state.verified=true;lesson.stage=1;op.disabled=true;$('divInverseN').readOnly=true;$('divInverseD').readOnly=true;
+  for(const id of ['ansN','ansD','ansSign'])$(id).disabled=false;
+  document.querySelector('.step-label').textContent=META[S.q.topic][0]+' · Étape 2';button.textContent='Valider le résultat';
+  lessonFeedback('La transformation est correcte. Calcule maintenant le résultat.',true);bindLessonFinal();
+ }catch(error){lessonFeedback(error.message);}};
+ $('divInverseN').focus({preventScroll:true});
+}
+function equalInstruction(q){
+ if(q.terms[0].d===1n)return "Complète l'égalité avec une fraction.";
+ if(q.fixedD!==undefined)return 'Trouve le numérateur manquant.';
+ if(q.fixedN!==undefined)return 'Trouve le dénominateur manquant.';
+ return 'Complète avec une fraction égale de ton choix.';
+}
+
+function renderQuestion(){
+ $('home').hidden=true;$('results').hidden=true;$('session').hidden=false;$('mode-badge').textContent=MODE[S.c.mode][0];$('quit').textContent=S.c.mode==='eval'?"Interrompre l'évaluation":'Accueil';
+ $('question-counter').textContent=S.c.mode==='learn'?'Exercice '+(S.index+1)+' sur '+LEARNING_COUNT:'Question '+(S.index+1)+' sur '+S.c.count;$('progress-bar').style.width=(S.index/S.c.count*100)+'%';
+ if(S.c.mode==='learn'){renderCalculator();renderLesson();return;}
+ $('work').innerHTML='<div class="card exercise-card"><div class="eyebrow">'+META[S.q.topic][0]+(S.c.progressive&&S.c.mode==='train'?' · Palier '+(S.difficulty+1):'')+'</div><p class="prompt">'+questionLabel(S.q)+(S.c.irreducible?' La fraction doit être irréductible.':'')+'</p><form id="answer-form"><div id="writing-zone">'+writingMarkup(S.q)+'</div><div class="actions" id="answer-actions"><button class="primary" type="submit">Valider</button></div></form><div id="feedback" aria-live="polite"></div></div>';
+ $('answer-form').onsubmit=e=>{e.preventDefault();submitAnswer();};bindAnswerKeys();bindDrafts();renderHelp();focusAnswer();updateTimer();
+}
+function bindAnswerKeys(){
+ const n=$('ansN'),d=$('ansD'),sign=$('ansSign');if(!n||!d)return;
+ n.onkeydown=e=>{if(e.key==='Enter'&&!d.readOnly&&!d.disabled&&!d.value){e.preventDefault();d.focus();}};
+ if(!sign)return;
+ sign.onclick=()=>setFrontSign({'':'−','−':'+','+':''}[sign.dataset.sign||'']);
+ sign.onkeydown=e=>{if(['-','−','+','Backspace','Delete'].includes(e.key)){e.preventDefault();setFrontSign(e.key==='-'||e.key==='−'?'−':e.key==='+'?'+':'');}};
+}
+
+function focusAnswer(){const n=$('ansN'),d=$('ansD');if(n)(n.readOnly?d:n).focus({preventScroll:true});}
+function readAnswer(prefix='ans'){const n=$(prefix+'N').value.trim().replaceAll('−','-'),d=$(prefix+'D').value.trim().replaceAll('−','-')||'1';if(!/^[+-]?[0-9]{1,9}$/.test(n)||!/^[+-]?[0-9]{1,9}$/.test(d))throw Error('Saisissez des nombres entiers (9 chiffres au maximum).');const sign=prefix==='ans'&&$('ansSign')?.dataset.sign==='−'?-1n:1n;return raw(BigInt(n)*sign,d);}
+
+function validate(q,a,c){if(!eq(a,q.expected))return {ok:false,reason:diagnose(q,a)};if(c.irreducible&&!(c.mode==='learn'&&q.topic==='equal')&&!irreducible(a))return {ok:false,reason:'reduce'};if(q.topic==='simplify'&&gcd(a.n,a.d)>=gcd(q.terms[0].n,q.terms[0].d))return {ok:false,reason:'simplify'};return {ok:true,reason:''};}
+function diagnose(q,a){if(q.ops.length===1){const [x,y]=q.terms,o=q.ops[0];if(['add','sub'].includes(o)&&eq(a,raw(o==='add'?x.n+y.n:x.n-y.n,x.d+y.d)))return 'denom';if(['add','sub'].includes(o)&&x.d!==y.d&&eq(a,raw(o==='add'?x.n+y.n:x.n-y.n,x.d)))return 'common';if(o==='div'){if(eq(a,mul(x,y)))return 'invert';if(x.n&&eq(a,mul(inverse(x),y)))return 'wrongInverse';}}return '';}
+const DIAG={reduce:'La valeur est juste, mais la fraction doit être irréductible. Divisez le numérateur et le dénominateur par un même diviseur commun.',simplify:'La valeur est juste. Il faut encore simplifier la fraction donnée, en divisant ses deux termes par un même diviseur commun.',denom:"Cette réponse correspond à une opération sur les deux dénominateurs. Pour additionner ou soustraire, on garde un dénominateur commun.",common:'Cette réponse correspond à un calcul sur les numérateurs avant la mise au même dénominateur. Commencez par obtenir des parts de même taille.',invert:'Cette réponse correspond à une multiplication par le diviseur. Pour diviser, multipliez par son inverse.',wrongInverse:"Cette réponse correspond à l'inversion de la première fraction. Gardez la première fraction et inversez seulement le diviseur."};
+// 5. Entraînement et évaluation : le premier essai est immuable.
+function submitAnswer(){if(S.locked||S.phase!=='answer'||expired())return;let a;try{a=readAnswer();}catch(e){$('feedback').innerHTML=`<div class="feedback">${e.message}</div>`;return;}captureDrafts();const q=S.q,v=validate(q,a,S.c);q.attempts.push(a);q.response=a;q.answered=true;if(q.first===null){q.first=v.ok;q.diagnostic=v.reason;}q.final=v.ok;
+ if(S.c.mode==='eval'){
+  S.phase='done';S.locked=true;S.qAnsweredAt=Date.now();lockInputs();
+  const rules={add:"Pour additionner ou soustraire des fractions, il faut qu'elles aient le même dénominateur.",sub:"Pour additionner ou soustraire des fractions, il faut qu'elles aient le même dénominateur.",mul:"Pour multiplier deux fractions, on multiplie les numérateurs entre eux et les dénominateurs entre eux.",div:"Diviser par un nombre non nul, c'est multiplier par son inverse.",equal:"Deux fractions sont égales lorsqu'on passe de l'une à l'autre en multipliant ou en divisant le numérateur et le dénominateur par un même nombre non nul.",simplify:"Deux fractions sont égales lorsqu'on passe de l'une à l'autre en multipliant ou en divisant le numérateur et le dénominateur par un même nombre non nul."};
+  $('feedback').innerHTML='<div class="feedback '+(v.ok?'good':'')+'"><strong>'+(v.ok?"Bien, c'est juste !":"Petite erreur !")+'</strong>'+(!v.ok&&rules[q.topic]?'<p>'+rules[q.topic]+'</p>':'')+'</div>';
+  $('answer-actions').innerHTML='<button type="button" class="primary" id="next">Question suivante</button>';$('next').onclick=()=>{if(S.c.time[0]==='t'&&expired())return;advance();};return;
+ }showDraftStates();
+ if(v.ok){S.phase='done';S.qAnsweredAt=Date.now();$('answer-actions').innerHTML=`<button type="button" class="primary" id="next">${S.index+1===S.c.count?'Voir mon bilan':'Question suivante →'}</button>`;$('feedback').innerHTML=`<div class="feedback good">${q.attempts.length===1?'Bien joué, votre réponse est correcte.':'Vous avez réussi à vous corriger.'}</div>`;$('next').onclick=advance;lockInputs();}
+ else{S.phase='choice';$('feedback').innerHTML=`<div class="feedback"><p>${DIAG[v.reason]||"Ce n'est pas encore la bonne réponse. Reprenez le calcul en vous aidant de la règle si nécessaire."}</p></div>`;$('answer-actions').innerHTML='<button type="button" id="retry" class="primary">Je me corrige</button><button type="button" id="pass">Je passe</button>';$('retry').onclick=()=>{if(expired())return;S.phase='answer';$('answer-actions').innerHTML='<button class="primary" type="submit">Vérifier ma correction</button>';focusAnswer();};$('pass').onclick=()=>showCorrection(false);}
+}
+function lockInputs(){document.querySelectorAll('#answer-form input,#answer-form select,#answer-form .front-sign,#answer-form .draft-tools button,#add-step').forEach(el=>{if(el.tagName==='INPUT')el.readOnly=true;else el.disabled=true;});for(const id of ['ansN','ansD'])if($(id))$(id).readOnly=true;if($('ansSign'))$('ansSign').disabled=true;}
+function showCorrection(timeout=false){if(!S||S.phase==='done')return;captureDrafts();const q=S.q;if(q.first===null)q.first=false;q.final=false;S.phase='done';lockInputs();showDraftStates();$('feedback').innerHTML='<div class="feedback"><p>'+(timeout?'Le temps de cette question est écoulé.':'Prenez le temps de lire la correction.')+'</p>'+correctionHTML(q)+'</div>';$('answer-actions').innerHTML='<button type="button" class="primary" id="next">'+(S.index+1===S.c.count?'Voir mon bilan':'Question suivante →')+'</button>';$('next').onclick=advance;}
+
+function advance(){if(!S)return;if(S.c.mode==='train'&&S.c.progressive){if(S.q.first){S.streak++;if(S.streak>=3){S.difficulty=Math.min(5,S.difficulty+1);S.streak=0;}}else{S.streak=0;S.difficulty=Math.max(0,S.difficulty-1);}}S.index++;if(S.index>=S.c.count)finish();else nextQuestion();}
+function startSession(override){$('config-error').textContent='';if(!cfg.topics.length){$('config-error').textContent='Choisissez au moins une notion.';return;}if(cfg.topics.some(k=>['add','sub'].includes(k))&&!cfg.cats.length){$('config-error').textContent='Choisissez au moins un type de dénominateurs.';return;}save();const c=structuredClone(override||cfg);if(c.mode!=='train')c.progressive=false;if(c.mode==='learn'){c.time='none';c.priority=false;c.count=LEARNING_COUNT;}if(!c.topics.some(k=>OP[k]))c.priority=false;
+ const topics=[...c.topics];if(c.mode==='learn')for(let i=topics.length-1;i>0;i--){const j=rand(0,i);[topics[i],topics[j]]=[topics[j],topics[i]];}const plan=Array.from({length:c.count},(_,i)=>topics[i%topics.length]);for(let i=plan.length-1;i>0;i--){let j=rand(0,i);[plan[i],plan[j]]=[plan[j],plan[i]];}
+ clearInterval(ticker);S={c,plan,index:0,questions:[],seen:new Set(),start:Date.now(),difficulty:0,streak:0,ended:false,exported:false,learningEncounters:{}};helpOpen='';$('calculator-panel').innerHTML='';nextQuestion();ticker=setInterval(updateTimer,200);try{const p=document.documentElement.requestFullscreen?.();if(p)p.catch(()=>{});}catch{}
+}
+// 6. Corrections structurées partagées par l'écran et le PDF.
+const F=(a,cls='')=>({type:'fraction',a,cls}),T=text=>({type:'text',text});
+function exprTokens(q,terms=q.terms,ops=q.ops){
+ if(q.factors&&terms===q.terms)return [F({n:q.factors[0].join(' × '),d:q.factors[1].join(' × ')})];
+ const result=[];terms.forEach((a,i)=>{if(i)result.push(T(META[ops[i-1]][1]));result.push({...F(a),integer:a.d===1n});});return result;
+}
+function displayTokens(tokens){
+ const result=tokens.map(t=>t.type==='fraction'?{...t,a:{...t.a}}:{...t});
+ for(let i=1;i<result.length;i++){
+  const t=result[i],previous=result[i-1];if(t.type!=='fraction'||t.signPlacement||previous.type!=='text'||!['+','−'].includes(previous.text))continue;
+  const view=fractionView(t.a);if(view.sign==='−'){previous.text=previous.text==='+'?'−':'+';t.a={n:view.n,d:view.d};}
+ }
+ return result;
+}
+
+function questionTokens(q){return [...(unaryPrefix(q)?[T(unaryPrefix(q))]:[]),...exprTokens(q),T('='),F({n:q.fixedN??'?',d:q.fixedD??'?'})];}
+function expectedEntry(q){if(q.fixedD!==undefined)return raw(q.fixedD*q.expected.n/q.expected.d,q.fixedD);if(q.fixedN!==undefined)return raw(q.fixedN,q.fixedN*q.expected.d/q.expected.n);return q.expected;}
+const factorText=n=>BigInt(n)<0n?'('+String(n).replace('-','−')+')':String(n);
+function correction(q){const x=q.terms[0],y=q.terms[1],rows=[{text:'Question initiale',tokens:questionTokens(q)}];
+ if(q.ops.length===1&&['add','sub'].includes(q.ops[0])){
+  const op=META[q.ops[0]][1],d=lcm(x.d,y.d),kx=d/x.d,ky=d/y.d,a=raw(x.n*kx,d),b=raw(y.n*ky,d),r=raw(q.ops[0]==='add'?a.n+b.n:a.n-b.n,d);
+  rows.push({text:'Multiplier les deux termes de la première fraction par '+kx+', et ceux de la seconde par '+ky+'.',tokens:[...exprTokens(q),T('='),F(x),T('×'),F(raw(kx,kx)),T(op),F(y),T('×'),F(raw(ky,ky))]});
+  rows.push({text:'Les fractions ont le même dénominateur. On additionne ou soustrait les numérateurs.',tokens:[...exprTokens(q),T('='),F(a,'frame-green'),T(op),F(b,'frame-orange'),T('='),F(r)]});
+ }else if(q.ops.length===1&&q.ops[0]==='div'){
+  rows.push({text:"Diviser par un nombre non nul, c'est multiplier par son inverse.",tokens:[F(x,'frame-green'),T('÷'),F(y,'frame-orange'),T('='),F(x,'frame-green'),T('×'),F(displayedInverse(y),'frame-orange'),T('='),F(q.expected)]});
+  rows.push({text:'La première fraction verte reste inchangée. Seul le diviseur orange est inversé.',tokens:[F(x),T('×'),F(displayedInverse(y)),T('='),F({n:factorText(x.n)+' × '+factorText(y.d),d:factorText(x.d)+' × '+factorText(y.n)}),T('='),F(q.expected)]});
+ }else if(q.ops.length===1&&q.ops[0]==='mul'){
+  rows.push({text:'On multiplie les numérateurs entre eux et les dénominateurs entre eux.',tokens:[...exprTokens(q),T('='),F({n:factorText(x.n)+' × '+factorText(y.n),d:factorText(x.d)+' × '+factorText(y.d)}),T('='),F(q.expected)]});
+ }else if(q.ops.length===2){
+  const i=q.ops.findIndex(o=>['mul','div'].includes(o));let ts=q.terms.slice(),os=q.ops.slice();const j=i<0?0:i;
+  const partial={topic:os[j],terms:[ts[j],ts[j+1]],ops:[os[j]],expected:OP[os[j]](ts[j],ts[j+1])};
+  rows.push({text:i<0?'Même priorité : commencer à gauche.':'Effectuer la multiplication ou la division prioritaire.',tokens:[...exprTokens(partial),T('='),F(partial.expected)]});
+  rows.push(...correction(partial).slice(1,-1));ts.splice(j,2,partial.expected);os.splice(j,1);
+  rows.push({text:'Remplacer ce calcul par son résultat dans l’expression complète.',tokens:[...exprTokens(q),T('='),...exprTokens(q,ts,os)]});
+  rows.push(...correction({topic:os[0],terms:ts,ops:os,expected:evaluate(ts,os)}).slice(1,-1));
+ }else if(q.topic==='simplify'){
+  const g=gcd(x.n,x.d);rows.push({text:'Diviser le numérateur et le dénominateur par '+g+'.',tokens:[F(x),T('='),F({n:factorText(x.n)+' ÷ '+g,d:factorText(x.d)+' ÷ '+g}),T('='),F(q.expected)]});
+  if(q.level===3)rows.push({text:'Les facteurs premiers communs peuvent être supprimés par paires.',tokens:[F(x),T('='),F({n:(x.n<0n?'− ':'')+primes(x.n).join(' × '),d:primes(x.d).join(' × ')}),T('='),F(q.expected)]});
+ }else if(q.topic==='opposite'){
+  rows.push({text:'Un nombre et son opposé ont pour somme zéro.',tokens:[F(x),T('+'),F(q.expected),T('='),T('0')]});
+  const mag=raw(abs(q.expected.n)||1n,q.expected.d);
+  rows.push({text:'Le signe moins peut être placé devant la fraction, au numérateur ou au dénominateur : cela représente le même nombre.',tokens:[T('−'),F(mag),T('='),{...F(raw(-mag.n,mag.d)),signPlacement:'numerator'},T('='),{...F(raw(mag.n,-mag.d)),signPlacement:'denominator'}]});
+ }else if(q.topic==='inverse')rows.push({text:'Deux nombres non nuls sont inverses lorsque leur produit vaut 1.',tokens:[F(x),T('×'),F(q.expected),T('='),T('1')]});
+ else if(q.topic==='equal'){
+  const chain=[F(x)];for(let k=2n;k<=5n;k++)chain.push(T('='),F(raw(x.n*k,x.d*k)));chain.push(T('='),T('…'));
+  rows.push({text:'Les multiplicateurs ×2, ×3, ×4 et ×5 s’appliquent tous à la fraction initiale, jamais successivement à la précédente.',tokens:chain});
+  for(let k=2n;k<=5n;k++)rows.push({text:'Depuis la fraction initiale : multiplier le numérateur ET le dénominateur par '+k+'.',tokens:[F(x),T('='),F({n:factorText(x.n)+' × '+k,d:factorText(x.d)+' × '+k},'frame-orange'),T('='),F(raw(x.n*k,x.d*k))]});
+  rows.push({text:'Pour obtenir deux fractions égales, on multiplie ou divise le numérateur et le dénominateur par un même nombre non nul.',tokens:[F(x),T('='),F(expectedEntry(q))]});
+ }
+ rows.push({text:unaryPrefix(q)?'Conclusion':q.topic==='equal'?'Égalité complétée':'Résultat irréductible',tokens:solvedTokens(q,q.topic==='equal'?expectedEntry(q):q.expected)});return rows;
+}
+function tokensHTML(ts){return displayTokens(ts).map(t=>t.type==='text'?'<span class="math-text">'+esc(t.text)+'</span>':frac(t.a,!t.integer,t.cls||'',t.signPlacement||'front')).join('');}
+
+function correctionHTML(q){return correction(q).map(r=>'<p>'+r.text+'</p><div class="equation-scroll"><div class="equation correction">'+tokensHTML(r.tokens)+'</div></div>').join('');}
+
+// 7. Parcours guidés : mise au même dénominateur, schémas et facteurs manipulables.
+function initLesson(){const q=S.q;lesson={stage:0,common:null,cut:[false,false],selected:null,cancel:[[],[]],message:'',division:{operation:'div',n:'',d:'',verified:false}};if(q.topic==='simplify'&&q.level===3)lesson.pf=[primes(q.terms[0].n),primes(q.terms[0].d)];}
+function cake(a,parts,color='',removed=0){const count=Math.max(1,Math.ceil(Number(abs(a.n))/Number(a.d))),filled=Number(abs(a.n))*parts/Number(a.d);let s='';for(let unit=0;unit<count;unit++){s+=`<div class="cake ${color}" style="--parts:${parts}">${Array.from({length:parts},(_,i)=>`<span class="${unit*parts+i<filled?'fill':''} ${removed&&unit*parts+i>=filled-removed&&unit*parts+i<filled?'removed':''}"></span>`).join('')}</div>`;}return s+(a.n<0n?'<small>La surface représente la valeur absolue ; le signe du nombre est négatif.</small>':'');}
+function renderLesson(){const q=S.q,L=lesson,isSum=['add','sub'].includes(q.topic);$('help').innerHTML='';$('work').innerHTML=`<div class="card exercise-card"><div class="step-label">${META[q.topic][0]} · Étape ${L.stage+1}</div><div id="lesson-body" class="lesson-text"></div><div id="lesson-feedback" aria-live="polite"></div><div class="actions" id="lesson-actions"></div></div>`;const b=$('lesson-body'),a=$('lesson-actions');
+ if(isSum&&L.stage===0){b.innerHTML=`<h2>Mettre au même dénominateur</h2><p><strong>${q.topic==='add'?"Pour additionner deux fractions, il faut qu'elles aient le même dénominateur.":"Pour soustraire deux fractions, il faut qu'elles aient le même dénominateur."}</strong></p><p class="course-detail">Le dénominateur correspond à la taille des morceaux. Avoir le même dénominateur, c'est avoir des morceaux de même taille.</p><p>${q.topic==='add'?"Pour compter les morceaux ensemble, ils doivent avoir la même taille.":"Pour retirer des morceaux, ils doivent avoir la même taille."} Chaque rectangle représente une unité. La surface coloriée ne change pas quand on redécoupe.</p><div class="equation-scroll"><div class="equation correction">${expression(q)}</div></div><div class="cake-row">${q.terms.map((f,i)=>`<div class="cake-wrap">${frac(f,true)}${cake(f,Number(f.d),i?'orange':'')}</div>`).join('')}</div><form id="common-form" novalidate><label class="field">Choisissez un dénominateur commun (60 au maximum pour dessiner les parts).<input id="common-input" inputmode="numeric" type="number" min="1" max="60"></label><p><small>Un multiple commun des deux dénominateurs convient. Le plus petit est souvent le plus pratique.</small></p><button class="primary">Vérifier le découpage</button></form>`;$('common-form').onsubmit=e=>{e.preventDefault();const d=Number($('common-input').value);if(!Number.isInteger(d)||d<1||d>60||BigInt(d)%q.terms[0].d||BigInt(d)%q.terms[1].d){lessonFeedback('Choisissez un entier multiple des deux dénominateurs, entre 1 et 60.');return;}L.common=BigInt(d);L.stage=1;renderLesson();};
+ }else if(isSum&&L.stage===1){b.innerHTML=`<h2>Transformer les fractions</h2><p>Multipliez le numérateur <em>et</em> le dénominateur par le même nombre. La fraction qui multiplie vaut 1. Manipulez les deux rectangles, puis complétez les égalités.</p><div class="cake-row">${q.terms.map((f,i)=>{const k=L.common/f.d;return `<div class="cake-wrap">${cake(f,Number(L.cut[i]?L.common:f.d),i?'orange':'')}<button data-cut="${i}" ${L.cut[i]?'disabled':''}>${k===1n?'Garder les parts':`Découper chaque part en ${k}`}</button><div class="equation-scroll"><div class="equation correction">${frac(f,true)}<span>×</span>${frac(raw(k,k),true)}<span>=</span><span class="frac answer"><span class="num"><input id="conv${i}N" aria-label="Numérateur transformé ${i+1}" inputmode="text" maxlength="9"></span><span class="den"><input id="conv${i}D" aria-label="Dénominateur transformé ${i+1}" inputmode="numeric" maxlength="9"></span></span></div></div></div>`;}).join('')}</div>`;a.innerHTML='<button id="check-convert" class="primary">Vérifier mes transformations</button>';document.querySelectorAll('[data-cut]').forEach(el=>el.onclick=()=>{const values=q.terms.map((_,i)=>[$('conv'+i+'N').value,$('conv'+i+'D').value]);L.cut[+el.dataset.cut]=true;renderLesson();values.forEach((v,i)=>{$('conv'+i+'N').value=v[0];$('conv'+i+'D').value=v[1];});});$('check-convert').onclick=()=>{if(L.cut.some(v=>!v)){lessonFeedback('Manipulez d’abord les deux rectangles avec les boutons de découpage.');return;}try{for(let i=0;i<2;i++){const f=readAnswer('conv'+i);if(f.d!==L.common||f.n!==q.terms[i].n*(L.common/q.terms[i].d))throw Error('Complétez chaque transformation avec le dénominateur commun choisi et le numérateur correspondant.');}L.stage=2;renderLesson();}catch(e){lessonFeedback(e.message);}};
+ }else if(isSum){const ts=q.terms.map(f=>raw(f.n*(L.common/f.d),L.common));b.innerHTML=`<h2>${q.topic==='add'?'Additionner les numérateurs':'Soustraire les numérateurs'}</h2><p>Le dénominateur indique la taille des parts : il reste identique. ${q.topic==='add'?'Additionnez':'Soustrayez'} les numérateurs.${S.c.irreducible?' Simplifiez ensuite le résultat.':''}</p><div class="cake-row"><div class="cake-wrap">${q.topic==='sub'&&q.expected.n>=0n&&ts.every(f=>f.n>=0n)?cake(ts[0],Number(L.common),'',Number(ts[1].n)):cake(q.expected,Number(L.common))}</div></div><form id="lesson-answer"><div class="equation-scroll"><div class="equation">${expression(q,ts)}<span>=</span>${answerMarkup(q)}</div></div><div class="actions"><button class="primary">Vérifier</button></div></form>`;bindLessonFinal();
+ }else if(q.topic==='simplify'&&q.level===3&&L.stage===0){const pf=L.pf;b.innerHTML=`<h2>Barrer les facteurs communs</h2><p>Décomposez en facteurs premiers, puis sélectionnez un facteur en haut et le même en bas. Chaque paire barrée revient à diviser les deux termes par ce facteur.</p><div class="equation-scroll"><div class="equation correction">${expression(q)}<span>=</span><span class="frac"><span class="num">${q.terms[0].n<0n?'− ':''}<span class="factor-row">${factorButtons(0)}</span></span><span class="den factor-row">${factorButtons(1)}</span></span></div></div>`;a.innerHTML='<button id="factor-next" class="primary">Terminer la simplification</button>';document.querySelectorAll('[data-factor]').forEach(el=>el.onclick=()=>cancelFactor(+el.dataset.row,+el.dataset.factor));$('factor-next').onclick=()=>{if(pf[0].some((v,i)=>!L.cancel[0].includes(i)&&v>1n&&pf[1].some((w,j)=>w===v&&!L.cancel[1].includes(j)))){lessonFeedback('Il reste des facteurs premiers communs à barrer.');return;}L.stage=1;renderLesson();};
+ }else if(q.topic==='div'){
+ b.innerHTML='<h2>Division</h2><p><strong>Diviser par un nombre non nul, c’est multiplier par son inverse.</strong></p><form id="lesson-answer">'+divisionLessonMarkup(q)+'<div class="actions"><button class="primary" type="submit">Vérifier la transformation</button></div></form>';bindDivisionLesson();
+ }else{const rules={mul:'Pour multiplier deux fractions, on multiplie les numérateurs entre eux et les dénominateurs entre eux.',div:"Diviser par un nombre non nul, c'est multiplier par son inverse. Gardez la première fraction ; inversez seulement le diviseur.",equal:'Pour obtenir deux fractions égales, il suffit de multiplier ou de diviser le numérateur et le dénominateur par un même nombre non nul.',simplify:q.level===1?'Cherchez un diviseur commun évident : 2, 3, 5 ou 10. Divisez les deux termes par le même nombre.':'Cherchez des diviseurs communs successifs, ou utilisez le PGCD pour simplifier en une étape.',opposite:"L'opposé d'un nombre est celui qui, ajouté au premier, donne zéro : changez son signe.",inverse:"Le produit d'un nombre non nul par son inverse vaut 1. Échangez le numérateur et le dénominateur. Le signe reste le même."};
+ b.innerHTML=`<h2>${META[q.topic][0]}</h2><p><strong>${rules[q.topic]}</strong></p>${q.topic==='mul'?'<p class="course-detail">Cela correspond à faire : en haut fois en haut, en bas fois en bas.</p>':''}${q.topic==='equal'?`<div class="cake-row"><div class="cake-wrap">${cake(q.terms[0],Number(q.terms[0].d))}<small>La quantité doit rester la même.</small></div></div>`:''}${q.topic==='equal'?'<p class="equal-instruction">'+equalInstruction(q)+'</p>':''}<form id="lesson-answer"><div class="equation-scroll">${qEquation(q)}</div><div class="actions"><button class="primary">Vérifier</button></div></form>`;bindLessonFinal();
+ }
+ if(LESSON_DOCUMENTS[q.topic])b.insertAdjacentHTML('beforeend',`<p><a download="Muscu-Fractions-fiche.pdf" href="${esc(LESSON_DOCUMENTS[q.topic])}">Télécharger la fiche complémentaire</a></p>`);
+ if(L.message)lessonFeedback(L.message);
+}
+function factorButtons(row){return lesson.pf[row].map((n,i)=>`<button class="factor ${lesson.cancel[row].includes(i)?'cancelled':''} ${lesson.selected?.[0]===row&&lesson.selected?.[1]===i?'selected-factor':''}" data-row="${row}" data-factor="${i}" ${lesson.cancel[row].includes(i)?'disabled':''} aria-label="Facteur ${n}, ${row?'dénominateur':'numérateur'}">${n}</button>`).join('<span>×</span>');}
+function cancelFactor(row,i){const L=lesson;if(!L.selected){L.selected=[row,i];L.message='Sélectionnez le même facteur de l’autre côté de la barre.';}else{const [r,j]=L.selected;if(r!==row&&L.pf[r][j]===L.pf[row][i]){L.cancel[r].push(j);L.cancel[row].push(i);L.message='Les deux termes ont été divisés par le même nombre.';}else L.message='Choisissez deux facteurs égaux, un en haut et un en bas.';L.selected=null;}renderLesson();}
+function lessonFeedback(text,good=false){$('lesson-feedback').innerHTML='<div class="feedback '+(good?'good':'')+'">'+text+(!good?'<div class="actions"><button type="button" id="lesson-correction-trigger">Voir la correction</button></div>':'')+'</div>';if($('lesson-correction-trigger'))$('lesson-correction-trigger').onclick=showLessonCorrection;}
+function continueLesson(){
+ const q=S.q,L=lesson;L.message='';
+ if(['add','sub'].includes(q.topic)&&L.stage<2){if(L.stage===0){L.common=lcm(q.terms[0].d,q.terms[1].d);L.stage=1;}else{L.cut=[true,true];L.stage=2;}renderLesson();return;}
+ if(q.topic==='simplify'&&q.level===3&&L.stage===0){L.stage=1;renderLesson();return;}
+ if(q.topic==='div'&&!L.division.verified){const a=displayedInverse(q.terms[1]);Object.assign(L.division,{operation:'mul',n:String(a.n),d:String(a.d),verified:true});L.stage=1;renderLesson();return;}
+ q.learnCompleted=true;S.index++;
+ if(S.index===LEARNING_COUNT)finishLearning();else nextQuestion();
+}
+function finishLearning(){
+ S.ended=true;S.end=Date.now();clearInterval(ticker);renderCalculator();$('session').hidden=true;$('results').hidden=false;
+ $('results').innerHTML='<div class="card learning-end"><h1>Bravo !</h1><p>Tu as terminé les 5 exercices d’apprentissage. Tu peux maintenant passer à l’entraînement.</p><div class="actions"><button class="primary" id="learn-to-train">Passer à Je m’entraîne</button><button id="learn-home">Retour à l’accueil</button></div></div>';
+ $('learn-home').onclick=goHome;$('learn-to-train').onclick=()=>{const c=S.c;cfg={...cfg,mode:'train',topics:[...c.topics],cats:[...c.cats],level:c.level,numbers:c.numbers,irreducible:c.irreducible,mixIntegers:c.mixIntegers};save();goHome();};
+}
+function lessonSuccess(){
+ const last=S.index+1===LEARNING_COUNT;
+ lessonFeedback('Exercice réussi !',true);
+ $('lesson-answer').querySelector('[type="submit"],button:not([type])').disabled=true;
+ $('lesson-actions').innerHTML='<button class="primary" id="lesson-next">'+(last?'Terminer la séquence':'Exercice suivant')+'</button><button id="lesson-see">Voir la correction complète</button>';
+ $('lesson-next').onclick=continueLesson;$('lesson-see').onclick=showLessonCorrection;lockInputs();
+ $('progress-bar').style.width=((S.index+1)/LEARNING_COUNT*100)+'%';
+}
+
+function showLessonCorrection(){const q=S.q,L=lesson;let intro='';
+ if(['add','sub'].includes(q.topic)&&L.stage===0)intro='<p>Un dénominateur commun possible est <strong>'+lcm(q.terms[0].d,q.terms[1].d)+'</strong>. Il est multiple des deux dénominateurs.</p>';
+ if(['add','sub'].includes(q.topic)&&L.stage===1)intro=q.terms.map(f=>'<div class="equation-scroll"><div class="equation correction">'+tokensHTML([F(f),T('×'),F(raw(L.common/f.d,L.common/f.d)),T('='),F(raw(f.n*(L.common/f.d),L.common))])+'</div></div>').join('');
+ lessonFeedback(intro+correctionHTML(q),true);document.querySelectorAll('#lesson-body input').forEach(el=>el.readOnly=true);document.querySelectorAll('#lesson-body select').forEach(el=>el.disabled=true);document.querySelectorAll('#lesson-body button').forEach(el=>el.disabled=true);
+ $('lesson-actions').innerHTML='<button class="primary" id="lesson-continue">J’ai compris, continuer</button>';$('lesson-continue').onclick=continueLesson;
+ if(q.topic==='equal')showEquivalenceAnimation(q,expectedEntry(q));
+}
+function bindLessonFinal(){
+ bindAnswerKeys();$('lesson-answer').onsubmit=e=>{e.preventDefault();if(S.q.topic==='div'&&!lesson.division.verified)return;
+ try{const a=readAnswer(),v=validate(S.q,a,S.c);if(!v.ok){lessonFeedback(DIAG[v.reason]||'Ce n’est pas encore juste. Vérifie la règle et réessaie, ou consulte la correction.');return;}
+  lessonSuccess();if(S.q.topic==='equal')showEquivalenceAnimation(S.q,a);
+ }catch(error){lessonFeedback(error.message);}};focusAnswer();
+}
+
+// Les surfaces ont la même échelle, et autant de rectangles-unité que nécessaire.
+function equivalenceSVG(a,gridClass=''){const count=Math.max(1,Number((abs(a.n)+abs(a.d)-1n)/abs(a.d))),height=count*50;
+ const den=Number(abs(a.d)),value=Number(abs(a.n))/den;let content='';
+ for(let u=0;u<count;u++){const y=u*50+3,w=270*Math.max(0,Math.min(1,value-u));content+='<rect x="10" y="'+y+'" width="270" height="36" fill="white"/><rect class="quantity-fill" x="10" y="'+y+'" width="'+w+'" height="36"/>';
+ if(den<=120)for(let k=1;k<den;k++)content+='<path class="'+gridClass+'" d="M'+(10+270*k/den)+' '+y+'v36"/>';
+ content+='<rect x="10" y="'+y+'" width="270" height="36" fill="none"/>';}
+ return '<svg viewBox="0 0 290 '+height+'" role="img" aria-label="'+count+' rectangle'+(count>1?'s':'')+' unité, quantité coloriée égale à la valeur absolue de la fraction">'+content+'</svg>';
+}
+function showEquivalenceAnimation(q,a){$('equivalence-animation')?.remove();const source=q.terms[0],units=Number((abs(source.n)+source.d-1n)/source.d),px=Math.max(1,units)*42,sameCut=abs(source.d)===abs(a.d);
+ const container=document.createElement('section');container.id='equivalence-animation';container.className='equivalence-animation';container.innerHTML='<h3>'+ (sameCut?'Même valeur, même découpage':'Même valeur, deux découpages')+'</h3><div class="equivalence-legend"><span class="green-label">'+frac(source,true)+'</span><span>=</span><span class="orange-label">'+frac(a,true)+'</span></div><div class="equivalence-stage running" style="--layer-height:'+px+'px;--separation:'+(px+24)+'px;height:'+(px*2+40)+'px"><div class="equivalence-layer green-layer">'+equivalenceSVG(source)+'</div><div class="equivalence-layer orange-layer">'+equivalenceSVG(a,'subdivision')+'</div></div><p class="equivalence-caption"><strong>'+(sameCut?'Même quantité, même découpage !':'Même quantité, découpage différent !')+'</strong></p>'+(source.n<0n?'<p class="course-detail">Les rectangles montrent la valeur absolue ; les deux fractions portent le même signe.</p>':'')+(Number(abs(a.d))>120?'<p class="course-detail">Le découpage est trop fin pour afficher chaque trait à cette échelle. Les surfaces coloriées conservent leur valeur exacte.</p>':'')+'<button type="button" id="replay-equivalence">Revoir l’animation</button>';
+ $('lesson-feedback').after(container);$('replay-equivalence').onclick=()=>{const stage=container.querySelector('.equivalence-stage');stage.classList.remove('running');void stage.offsetWidth;stage.classList.add('running');};
+}
+
+// 8. Aides facultatives, réservées à l'entraînement.
+function renderHelp(){if(S.c.mode!=='train'){$('help').innerHTML='';renderCalculator();return;}
+ $('help').innerHTML='<div class="helpbar"><button data-help="rule" class="quiet">Rappel de règle</button><button data-help="tables" class="quiet">Tables de multiplication</button>'+(S.c.calculator==='yes'?'<button id="toggle-calculator" class="quiet" aria-expanded="'+!!S.calcOpen+'">Calculatrice</button>':'')+'</div><div id="help-content"></div>';
+ document.querySelectorAll('[data-help]').forEach(b=>b.onclick=()=>{helpOpen=helpOpen===b.dataset.help?'':b.dataset.help;openHelp();});if($('toggle-calculator'))$('toggle-calculator').onclick=()=>{S.calcOpen=!S.calcOpen;renderCalculator();};openHelp();renderCalculator();
+}
+function openHelp(){const p=$('help-content');if(!p)return;if(!helpOpen){p.innerHTML='';return;}if(helpOpen==='rule'){const t=S.q.topic,rules={add:"Pour additionner deux fractions, il faut qu'elles aient le même dénominateur.",sub:"Pour soustraire deux fractions, il faut qu'elles aient le même dénominateur.",mul:'Pour multiplier deux fractions, on multiplie les numérateurs entre eux et les dénominateurs entre eux.',div:"Diviser par un nombre non nul, c'est multiplier par son inverse.",equal:'Pour obtenir deux fractions égales, il suffit de multiplier ou de diviser le numérateur et le dénominateur par un même nombre non nul.',simplify:'Divisez les deux termes par un même diviseur commun.',opposite:'Un nombre et son opposé ont une somme nulle. Changez le signe.',inverse:'Deux nombres non nuls sont inverses lorsque leur produit vaut 1.'};p.innerHTML='<div class="card help-panel"><h3>La règle</h3><p>'+rules[t]+'</p>'+(S.q.priority?'<p>Les multiplications et divisions passent avant les additions et soustractions.</p>':'')+'</div>';}
+ if(helpOpen==='tables'){p.innerHTML='<div class="card help-panel"><h3>Repérer les multiples communs</h3><div class="inline"><label>Table A <input id="tableA" type="number" value="3" min="1" max="99"></label><label>Table B <input id="tableB" type="number" value="6" min="1" max="99"></label><label>Jusqu’à <select id="tableMax"><option>10</option><option>20</option><option>30</option></select></label></div><div class="tables" id="table-output"></div></div>';for(const id of ['tableA','tableB','tableMax'])$(id).oninput=drawTables;drawTables();}
+}
+function renderCalculator(){const p=$('calculator-panel'),open=!!(S&&!S.ended&&S.c.mode==='train'&&S.c.calculator==='yes'&&S.calcOpen);p.hidden=!open;document.querySelector('main').classList.toggle('has-calculator',open);if($('toggle-calculator'))$('toggle-calculator').setAttribute('aria-expanded',open);if(!open)return;
+ if(!p.firstElementChild){p.innerHTML='<div class="compact-calculator"><header><strong>Calculatrice</strong><button type="button" id="close-calculator" aria-label="Fermer la calculatrice">×</button></header><div class="calc-screen"><div id="calc-expression">0</div><output id="calc-result" aria-live="polite"></output></div><div class="calc-keys" id="calc-keys"></div></div>';$('calc-keys').innerHTML=['C','⌫','÷','×','7','8','9','−','4','5','6','+','1','2','3','=','0',','].map(k=>'<button type="button" data-key="'+k+'" '+(k==='0'?'class="zero-key"':'')+'>'+k+'</button>').join('');
+ $('close-calculator').onclick=()=>{S.calcOpen=false;renderCalculator();};$('calc-keys').onclick=e=>{const key=e.target.dataset.key;if(!key)return;let entry=S.calcEntry||'';if(key==='C')entry='';else if(key==='⌫')entry=entry.slice(0,-1);else if(key==='='){try{const value=calculate(entry);$('calc-result').textContent=decimalResult(value);S.calcValue=value;}catch(err){$('calc-result').textContent=err.message;}return;}else if(entry.length<90)entry+=key;S.calcEntry=entry;S.calcValue=null;$('calc-expression').textContent=entry||'0';$('calc-result').textContent='';};}
+ $('calc-expression').textContent=S.calcEntry||'0';$('calc-result').textContent=S.calcValue?decimalResult(S.calcValue):'';
+ if(matchMedia('(max-width:1000px)').matches)$('ansN')?.scrollIntoView({block:'start',behavior:'instant'});
+}
+
+function keepCalculatorClear(target){
+ if(!S?.calcOpen||S.ended||!matchMedia('(max-width:1000px)').matches)return;
+ const input=target instanceof HTMLElement?target:$('ansN'),panel=$('calculator-panel');
+ if(!input||panel.hidden)return;
+ const field=input.getBoundingClientRect(),calculator=panel.getBoundingClientRect();
+ if(field.top<15||field.bottom>calculator.top-12)input.scrollIntoView({block:'start',behavior:'instant'});
+}
+function drawTables(){const a=+$('tableA').value,b=+$('tableB').value,m=+$('tableMax').value;if(![a,b].every(n=>Number.isInteger(n)&&n>=1&&n<=99)){$('table-output').textContent='Choisissez des tables de 1 à 99.';return;}$('table-output').innerHTML=[a,b].map((n,j)=>`<div><strong>Table de ${n}</strong><div class="table-lines">${Array.from({length:m},(_,i)=>{const k=i+1,other=j?a:b;return `<span class="${n*k%other===0&&n*k/other<=m?'common':''}">${n} × ${k} = ${n*k}</span>`;}).join('')}</div></div>`).join('');}
+// Analyseur sans eval : décimaux exacts pour la calculatrice, expressions entières pour les étapes.
+function parseArithmetic(input,decimals=true,parentheses=false){const text=String(input).replaceAll('−','-').replaceAll('×','*').replaceAll('÷','/').replaceAll('x','*').replaceAll('X','*').replaceAll(' ','');if(!text||text.length>100)throw Error('Calcul incomplet ou trop long.');
+ const tokens=text.match(decimals?/[0-9]+(?:[,.][0-9]*)?|[-+*/()]/g:/[0-9]+|[-+*/()]/g)||[];if(tokens.join('')!==text||(!parentheses&&/[()]/.test(text)))throw Error('Vérifiez le calcul.');let i=0;
+ function atom(){if(tokens[i]==='-'||tokens[i]==='+'){const neg=tokens[i++]==='-';const a=atom();return neg?opposite(a):a;}if(tokens[i]==='('&&parentheses){i++;const v=sum();if(tokens[i++]!==')')throw Error('Vérifiez les parenthèses.');return v;}
+ const t=tokens[i++];if(!/^[0-9]{1,18}(?:[,.][0-9]{0,12})?$/.test(t||''))throw Error('Calcul incomplet ou nombre trop grand.');const parts=t.replace(',','.').split('.');return rat(parts.join(''),10n**BigInt(parts[1]?.length||0));}
+ function product(){let v=atom();while(['*','/'].includes(tokens[i])){const op=tokens[i++],a=atom();v=op==='*'?mul(v,a):divide(v,a);}return v;}
+ function sum(){let v=product();while(['+','-'].includes(tokens[i])){const op=tokens[i++],a=product();v=op==='+'?add(v,a):sub(v,a);}return v;}const v=sum();if(i!==tokens.length)throw Error('Vérifiez le calcul.');return v;
+}
+function calculate(s){return parseArithmetic(s,true,false);}
+function decimalResult(a){const negative=a.n<0n,n=abs(a.n),d=abs(a.d);let text=String(n/d),rest=n%d;if(rest){text+=',';for(let i=0;i<12&&rest;i++){rest*=10n;text+=rest/d;rest%=d;}}return (rest?'≈ ':'')+(negative?'−':'')+text;}
+
+// 9. Chronométrage par échéance absolue : les onglets en arrière-plan ne figent pas le temps.
+function timeBudget(){const t=S.c.time;return t==='none'?0:Number(t.slice(1))*(t[0]==='q'?1000:60000);}
+function expired(){if(!S||S.ended||S.c.mode==='learn'||S.c.time==='none')return false;const total=S.c.time[0]==='t',deadline=(total?S.start:S.qStart)+timeBudget();if(Date.now()<deadline)return false;if(total){finish('timeout');}else if(S.phase!=='done'){if(S.c.mode==='eval'){captureDrafts();if(S.q.first===null)S.q.first=false;advance();}else showCorrection(true);}return true;}
+function updateTimer(){if(!S||S.ended)return;const t=$('timer'),enabled=S.c.mode!=='learn'&&S.c.time!=='none';t.hidden=!enabled;if(!enabled)return;const now=S.c.time[0]==='q'&&S.phase==='done'?(S.qAnsweredAt||Date.now()):Date.now();const remaining=Math.max(0,Math.ceil(((S.c.time[0]==='t'?S.start:S.qStart)+timeBudget()-now)/1000));t.textContent=`${Math.floor(remaining/60)}:${String(remaining%60).padStart(2,'0')}${S.c.time[0]==='q'?' / question':''}`;t.classList.toggle('urgent',remaining<=10);expired();}
+function elapsed(){return Math.max(0,Math.round((S.end-S.start)/1000));}
+function duration(s){return `${Math.floor(s/60)} min ${s%60} s`;}
+// 10. Bilan en mémoire uniquement ; les questions non présentées ne sont pas inventées.
+function finish(reason='complete'){if(S.ended)return;captureDrafts();S.ended=true;S.reason=reason;S.end=Date.now();clearInterval(ticker);renderCalculator();$('interrupt-dialog').close();$('session').hidden=true;$('results').hidden=false;renderResults();}
+function summary(){const qs=S.questions,good=qs.filter(q=>q.first===true).length,answered=qs.filter(q=>q.answered).length,final=qs.filter(q=>q.final).length;return {good,final,answered,bad:answered-good,unanswered:S.c.count-answered,initial:good*20/S.c.count,corrected:final*20/S.c.count};}
+function percentStats(){return S.c.topics.map(t=>{const assigned=S.plan.filter(x=>x===t).length,qs=S.questions.filter(q=>q.topic===t),good=qs.filter(q=>q.first).length;return {topic:t,total:assigned,good,pct:assigned?Math.round(good*100/assigned):0,unseen:assigned-qs.length};});}
+function recurring(){const counts={};for(const q of S.questions)if(q.diagnostic)counts[q.diagnostic]=(counts[q.diagnostic]||0)+1;return Object.entries(counts).filter(([k,n])=>n>=2).map(([k,n])=>`${n} fois : ${DIAG[k]}`);}
+function parameters(){return `${MODE[S.c.mode][0]} · ${S.c.count} questions · ${S.c.numbers==='signed'?'Relatifs':'Nombres non négatifs'} · ${S.c.calculator==='yes'?'Avec':'Sans'} calculatrice · ${S.c.time==='none'?'Sans limite':S.c.time[0]==='q'?S.c.time.slice(1)+' s par question':S.c.time.slice(1)+' min au total'} · Irréductible ${S.c.irreducible?'exigée':'non exigée'} · Simplification niveau ${S.c.level}${S.c.progressive?' · Progression activée':''}${S.c.priority?' · Priorités activées':''}. Dénominateurs : ${S.c.cats.map(k=>CATS[k][0]).join(', ')}. Entiers en multiplication/division : ${S.c.mixIntegers?'inclus':'non'}.`;}
+const score=n=>Number.isInteger(n)?String(n):n.toFixed(1).replace('.',',');
+function renderResults(){const a=summary(),evalMode=S.c.mode==='eval',mustExport=evalMode&&!S.exported;const title=S.reason==='interrupted'?'Évaluation interrompue':S.reason==='timeout'?'Temps écoulé':evalMode?'Votre bilan d’évaluation':'Votre bilan d’entraînement';
+ $('results').innerHTML=`<div class="brand"><div class="logo" aria-hidden="true"><span class="frac"><span class="num">14</span><span class="den">2</span></span></div><div><p class="eyebrow">Muscu Fractions</p><h1>${title}</h1></div></div><div class="stats"><div class="stat"><span>${evalMode?'Note sur 20':'Score initial /20'}</span><strong>${score(a.initial)}<small> /20</small></strong><span>${a.good} réponses correctes au premier essai</span></div><div class="stat"><span>${evalMode?'Réponses':'Score après correction /20'}</span><strong>${evalMode?a.bad:score(a.corrected)}${evalMode?'': '<small> /20</small>'}</strong><span>${evalMode?'incorrectes · '+a.unanswered+' sans réponse':a.final+' réponses finalement réussies'}</span></div><div class="stat"><span>Temps utilisé</span><strong style="font-size:26px">${duration(elapsed())}</strong><span>${S.questions.length} questions présentées sur ${S.c.count}</span></div></div><div class="card"><h2>Vos repères par notion</h2>${percentStats().map(s=>`<div>${META[s.topic][0]} <strong style="float:right">${s.pct} %</strong><div class="scoreline"><div style="width:${s.pct}%"></div></div><small>${s.good} réussites au premier essai sur ${s.total} questions prévues${s.unseen?' · '+s.unseen+' non présentées':''}</small></div>`).join('')}<p class="muted" style="margin-top:20px;font-size:13px">${esc(parameters())}</p>${recurring().map(t=>`<p class="notice">${t}</p>`).join('')}</div><div class="card"><div class="inline"><button class="primary" id="download">${evalMode?'Télécharger mon évaluation en PDF':'Télécharger mon bilan PDF'}</button><span id="download-status" role="status">${mustExport?'Déclenchez le téléchargement du bilan avant de quitter cet écran.':'Votre bilan reste disponible pendant cette session.'}</span></div><div class="actions"><button id="result-home" ${mustExport?'disabled':''}>Retour à l'accueil</button><button id="restart" ${mustExport?'disabled':''}>${evalMode?"Recommencer l'évaluation":'Recommencer'}</button>${!evalMode&&S.questions.some(q=>!q.first)?'<button id="targeted">Retravailler mes difficultés</button>':''}</div></div><details class="card"><summary>Revoir les questions et les corrections</summary>${S.questions.map((q,i)=>`<article class="result-row"><h3><span>Question ${i+1} · ${META[q.topic][0]}</span><span class="${q.first?'':'error'}">${q.answered?q.first?'Correcte':'Incorrecte':'Sans réponse'}</span></h3><p>Votre réponse${q.attempts.length>1?' (dernier essai)':''} : ${q.response?(unaryPrefix(q)?'<span class="equation correction">'+tokensHTML(solvedTokens(q,q.response))+'</span>':frac(q.response,true)):'Aucune réponse validée'}${q.attempts.length>1?' · Réponse initiale : '+frac(q.attempts[0],true):''}</p>${draftsSummaryHTML(q)}${correctionHTML(q)}</article>`).join('')}</details>`;
+ $('download').onclick=()=>{try{downloadPDF();S.exported=true;$('result-home').disabled=false;$('restart').disabled=false;$('download-status').textContent='Téléchargement déclenché. Conservez le fichier sur votre appareil.';}catch(e){$('download-status').textContent='Le PDF n’a pas pu être généré : '+e.message;}};$('result-home').onclick=goHome;$('restart').onclick=()=>startSession(S.c);if($('targeted'))$('targeted').onclick=()=>{const c={...S.c,topics:[...new Set(S.questions.filter(q=>!q.first).map(q=>q.topic))],progressive:false};startSession(c);};
+}
+// 11. PDF autonome : contenu vectoriel, vraies barres de fraction, police PDF standard.
+// Le flux ne contient que de l'ASCII ; les accents sont encodés en WinAnsi par octal.
+function pdfString(s){const special={'€':128,'œ':156,'Œ':140,'’':146,'‘':145,'“':147,'”':148,'–':150,'—':151,'…':133};return '('+String(s).replaceAll('−','-').replaceAll('→','=>').replaceAll('⇅','inverse').split('').map(ch=>{let code=special[ch]||ch.charCodeAt(0);if(code>255)code=63;if(ch==='('||ch===')'||ch==='\\')return '\\'+ch;if(code<32||code>=127)return '\\'+code.toString(8).padStart(3,'0');return ch;}).join('')+')';}
+function buildPDF(){let pages=[],stream='',y=790,pageNum=1;const W=595,M=42;
+ const text=(s,x,py,size=11)=>{stream+=`BT /F1 ${size} Tf ${x.toFixed(2)} ${py.toFixed(2)} Td ${pdfString(s)} Tj ET\n`;};
+ const line=(x1,y1,x2,y2)=>{stream+=`${x1.toFixed(2)} ${y1.toFixed(2)} m ${x2.toFixed(2)} ${y2.toFixed(2)} l S\n`;};
+ function newPage(){if(stream){text('Muscu Fractions · '+pageNum++,M,24,9);pages.push(stream);}stream='0.14 0.22 0.17 rg 0.14 0.22 0.17 RG 0.7 w\n';y=790;}
+ function ensure(h){if(y-h<48)newPage();}
+ function para(s,size=11){const max=Math.floor((W-2*M)/(size*.54)),words=String(s).split(/\s+/);let current='';for(const word of words){if((current+' '+word).length>max&&current){ensure(size+6);text(current,M,y,size);y-=size+6;current=word;}else current+=(current?' ':'')+word;}if(current){ensure(size+6);text(current,M,y,size);y-=size+6;}}
+ function tw(s,size){return String(s).length*size*.59;}
+ function detail(label,tokens){ensure(90+Math.ceil(label.length/90)*16);para(label,10);equation(tokens);}
+ function equation(tokens){
+  tokens=displayTokens(tokens);
+  const available=W-2*M;
+  const tokenWidth=(t,size)=>{if(t.type==='text')return tw(t.text,size)+9;const v=fractionView(t.a,t.signPlacement);return (t.integer?tw(v.sign+v.n,size):Math.max(tw(v.n,size),tw(v.d,size))+12+(v.sign?tw('−',size)+5:0))+9;};
+  const fullWidth=tokens.reduce((v,t)=>v+tokenWidth(t,14),0),size=fullWidth>available?12:14;
+  // Une unité associe l'opérateur à la fraction suivante ; aucune fraction n'est coupée.
+  const units=[];let pending=[];
+  for(const t of tokens){if(t.type==='fraction'){units.push([...pending,t]);pending=[];}else if(t.text===')'&&units.length)units.at(-1).push(t);else pending.push(t);}if(pending.length)units.push(pending);
+  const rows=[];let row=[],width=0;
+  for(const unit of units){const w=unit.reduce((v,t)=>v+tokenWidth(t,size),0);if(row.length&&width+w>available){rows.push(row);row=[];width=0;}row.push(...unit);width+=w;}if(row.length)rows.push(row);
+  for(const tokensRow of rows){ensure(size*3+40);y-=12;let x=M;
+   for(const t of tokensRow){
+    if(t.type==='text'){text(t.text,x,y-5,size);x+=tw(t.text,size)+9;continue;}
+    const view=fractionView(t.a,t.signPlacement);
+    if(t.integer){text(view.sign+view.n,x,y-5,size);x+=tw(view.sign+view.n,size)+9;continue;}
+    if(view.sign){text(view.sign,x,y-5,size);x+=tw('−',size)+5;}
+    const n=view.n,d=view.d,w=Math.max(tw(n,size),tw(d,size))+12;
+    text(n,x+(w-tw(n,size))/2,y+6,size);line(x,y,x+w,y);text(d,x+(w-tw(d,size))/2,y-size-2,size);
+    if(t.cls)stream+=(t.cls==='frame-orange'?'0.66 0.35 0.13 RG ':'0.21 0.4 0.3 RG ')+(x-2).toFixed(2)+' '+(y-size-6).toFixed(2)+' '+(w+4).toFixed(2)+' '+(size*2+16).toFixed(2)+' re S 0.14 0.22 0.17 RG'+String.fromCharCode(10);
+    x+=w+9;
+   }
+
+   y-=size*2.7+10;
+  }
+ }
+ newPage();const a=summary();para('Muscu Fractions',24);para(S.reason==='interrupted'?'Évaluation interrompue · Bilan partiel':S.reason==='timeout'?'Temps écoulé · Bilan':MODE[S.c.mode][0]+' · Bilan',15);para(new Date(S.start).toLocaleString('fr-FR'));para(parameters(),10);y-=8;para(`Score initial : ${score(a.initial)} sur 20${S.c.mode==='train'?' · Après correction : '+score(a.corrected)+' sur 20':''}`,15);para(`${a.good} correctes · ${a.bad} incorrectes · ${a.unanswered} sans réponse · Temps : ${duration(elapsed())}`);para(`${S.questions.length} questions réellement présentées ; ${S.c.count-S.questions.length} non présentées.`);
+ para('Résultats par notion',14);for(const s of percentStats())para(`${META[s.topic][0]} : ${s.pct} % (${s.good} sur ${s.total} prévues, ${s.unseen} non présentées)`,11);for(const r of recurring())para(r,10);
+ for(let i=0;i<S.questions.length;i++){const q=S.questions[i];ensure(230);y-=12;line(M,y,W-M,y);y-=24;para(`Question ${i+1} · ${META[q.topic][0]} · ${q.answered?q.first?'Correcte':'Incorrecte':'Sans réponse'}`,13);detail('Calcul posé :',questionTokens(q));if(q.response){detail('Réponse validée'+(q.attempts.length>1?' (dernier essai)':'')+' :',(unaryPrefix(q)?solvedTokens(q,q.response):[F(q.response)]));if(q.attempts.length>1){detail('Première réponse :',unaryPrefix(q)?solvedTokens(q,q.attempts[0]):[F(q.attempts[0])]);}}else para('Aucune réponse validée.',10);for(const st of (q.drafts||[]).filter(draftExists)){detail('Étape saisie · non notée : '+draftState(q,st).text,draftTokens(st));}detail('Bonne réponse :',unaryPrefix(q)?solvedTokens(q,expectedEntry(q)):[F(expectedEntry(q))]);for(const row of correction(q)){detail(row.text,row.tokens);}}
+ text('Muscu Fractions · '+pageNum,M,24,9);pages.push(stream);
+ const objects=[null,'<< /Type /Catalog /Pages 2 0 R >>','', '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>'];const kids=[];for(const p of pages){const pi=objects.length,ci=pi+1;kids.push(`${pi} 0 R`);objects.push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents ${ci} 0 R >>`);objects.push(`<< /Length ${p.length} >>\nstream\n${p}endstream`);}objects[2]=`<< /Type /Pages /Kids [${kids.join(' ')}] /Count ${pages.length} >>`;
+ let out='%PDF-1.4\n',offset=[0];for(let i=1;i<objects.length;i++){offset.push(out.length);out+=`${i} 0 obj\n${objects[i]}\nendobj\n`;}const xref=out.length;out+=`xref\n0 ${objects.length}\n0000000000 65535 f \n`;for(let i=1;i<objects.length;i++)out+=`${String(offset[i]).padStart(10,'0')} 00000 n \n`;out+=`trailer\n<< /Size ${objects.length} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;return new Uint8Array([...out].map(ch=>ch.charCodeAt(0)));
+}
+function downloadPDF(){const blob=new Blob([buildPDF()],{type:'application/pdf'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Muscu-Fractions-bilan-'+new Date(S.start).toLocaleDateString('fr-CA')+'.pdf';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);}
+// 12. Navigation et événements.
+function goHome(){clearInterval(ticker);S=null;lesson=null;renderCalculator();$('calculator-panel').innerHTML='';$('session').hidden=true;$('results').hidden=true;$('home').hidden=false;$('timer').hidden=true;if(document.fullscreenElement)document.exitFullscreen?.().catch(()=>{});renderConfig();window.scrollTo(0,0);}
+document.addEventListener('click',e=>{const mode=e.target.closest('[data-mode]'),topic=e.target.closest('[data-topic]');if(mode){cfg.mode=mode.dataset.mode;save();renderConfig();}if(topic){const t=topic.dataset.topic;cfg.topics=cfg.topics.includes(t)?cfg.topics.filter(x=>x!==t):[...cfg.topics,t];save();renderConfig();}});
+document.addEventListener('change',e=>{if(e.target.dataset.cat){const t=e.target.dataset.cat;cfg.cats=e.target.checked?[...new Set([...cfg.cats,t])]:cfg.cats.filter(k=>k!==t);save();}if(['level','count','numbers','calculator','time','irreducible','progressive','priority','mixIntegers'].includes(e.target.id)){const key=e.target.id;cfg[key]=e.target.type==='checkbox'?e.target.checked:['level','count'].includes(key)?+e.target.value:e.target.value;save();}});
+$('reset').onclick=()=>{cfg=structuredClone(DEFAULT);save();renderConfig();};$('start').onclick=()=>startSession();$('quit').onclick=()=>{if(S.c.mode==='eval')$('interrupt-dialog').showModal();else goHome();};$('cancel-interrupt').onclick=()=>$('interrupt-dialog').close();$('confirm-interrupt').onclick=()=>finish('interrupted');
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateTimer();});window.addEventListener('beforeunload',e=>{if(S&&S.c.mode==='eval'&&!S.exported){e.preventDefault();e.returnValue='';}});
+document.addEventListener('focusin',e=>{if(e.target.matches('.answer input,.draft-fraction input'))keepCalculatorClear(e.target);});
+window.addEventListener('resize',()=>requestAnimationFrame(keepCalculatorClear));
+renderConfig();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
